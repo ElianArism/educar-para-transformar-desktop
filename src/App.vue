@@ -2,6 +2,8 @@
   <nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
+    |
+    <button class="btn btn-primary"></button>
   </nav>
   <router-view />
 </template>
