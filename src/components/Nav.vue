@@ -5,6 +5,7 @@ import { RouterLink } from "vue-router";
 <template>
   <div class="wrapper">
     <div class="vertical-nav shadow-lg">
+      <img src="../assets/logo.jpg" alt="Logo" class="logo" />
       <h2>Menu</h2>
       <ul>
         <li class="nav-link">
@@ -83,12 +84,18 @@ a {
   padding: 15px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   border-top: 1px solid rgba(255, 255, 255, 0.05);
+  text-align: start;
 }
 .wrapper .vertical-nav ul li a {
   display: block;
 }
 .wrapper .vertical-nav ul li a .icons {
   width: 25px;
+}
+.logo {
+  max-height: 50px;
+  border-radius: 50%;
+  justify-content: start;
 }
 // .wrapper .vertical-nav ul li:hover {
 //   // background: #594f8d;

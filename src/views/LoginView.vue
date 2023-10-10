@@ -70,6 +70,8 @@ async function login(event) {
             <option value="student">Estudiante</option>
             <option value="professor">Profesor</option>
             <option value="parent">Padres</option>
+            <option value="Director">Director/Autoridad</option>
+            <option value="Admin">Admin</option>
           </select>
         </div>
         <input type="submit" value="Iniciar" />
