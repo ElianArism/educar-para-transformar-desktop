@@ -27,7 +27,9 @@ import { RouterLink } from "vue-router";
           >
         </li>
         <li class="nav-link">
-          <RouterLink to=""><i class="bi bi-bank icons"></i> Pagos</RouterLink>
+          <RouterLink to="/pay-fee"
+            ><i class="bi bi-bank icons"></i> Pagos</RouterLink
+          >
         </li>
         <li class="nav-link">
           <RouterLink to="/login"
