@@ -60,6 +60,7 @@ a {
     color: aquamarine;
     transform: scale(1.05);
     transition: 0.2s;
+    // Holasg
   }
 }
 .wrapper {
