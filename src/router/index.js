@@ -19,6 +19,14 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "payFee" */ "../views/PayFeeView.vue"),
   },
+  {
+    path: "/pay-fee/:studentId",
+    name: "pay-fee-student-id",
+    component: () =>
+      import(
+        /* webpackChunkName: "payStudentFee" */ "../views/PayStudentFeeView.vue"
+      ),
+  },
 ];
 
 const router = createRouter({
