@@ -1,6 +1,4 @@
-<script setup lang="js">
-// import { RouterLink } from "vue-router";
-</script>
+<script setup lang="js"></script>
 <template>
   <!-- <Nav /> -->
   <router-view />
