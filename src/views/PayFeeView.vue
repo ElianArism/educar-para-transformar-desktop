@@ -14,7 +14,7 @@ const router = useRouter();
           class="mb-5 d-flex flex-column align-items-center justify-content-center"
         >
           <h5 class="m-0">Pagar cuota</h5>
-          <hr class="m-0 w-50" />
+          <hr class="m-0 w-25" />
         </div>
       </div>
     </div>
@@ -36,7 +36,7 @@ const router = useRouter();
           <input
             type="text"
             class="form-control"
-            placeholder="Buscar por nro de legajo"
+            placeholder="Buscar por DNI"
           />
           <button class="mx-2 btn btn-primary">Buscar</button>
         </div>
@@ -62,7 +62,7 @@ const router = useRouter();
                 style="padding-right: 10px"
               >
                 <span> John Doe </span>
-                <span> Legajo: 266762 </span>
+                <span> DNI: 266762 </span>
               </span>
             </button>
           </h2>
