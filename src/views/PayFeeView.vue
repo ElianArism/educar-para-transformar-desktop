@@ -11,7 +11,7 @@ const router = useRouter();
     <div class="row">
       <div class="col">
         <div
-          class="mb-5 d-flex flex-column align-items-center justify-content-center"
+          class="mb-5 d-flex flex-column align-items-center justify-content-center p-1"
         >
           <h5 class="m-0">Pagar cuota</h5>
           <hr class="m-0 w-25" />
@@ -21,6 +21,7 @@ const router = useRouter();
 
     <div class="row mb-3">
       <div class="col-12">
+        <h5>Filtros</h5>
         <div class="d-flex">
           <select class="form-select">
             <option value="Curso 1">Curso 1</option>
@@ -43,6 +44,7 @@ const router = useRouter();
       </div>
     </div>
 
+    <h5>Alumnos</h5>
     <div class="accordion-cont border rounded mx-auto p-3">
       <div class="accordion" id="accordionStudents">
         <!--Accordion header   -->
