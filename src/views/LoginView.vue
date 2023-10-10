@@ -1,50 +1,51 @@
 <script setup>
-// import Swal from "sweetalert2";
-// import { useRouter } from "vue-router";
-// const router = useRouter();
-// const usuariosObject = {
-//   id: "",
-//   password: "",
-//   role: "",
-// };
+import Swal from "sweetalert2";
+import { useRouter } from "vue-router";
 
-// async function login(event) {
-//   event.preventDefault();
+const router = useRouter();
+const usuariosObject = {
+  id: "",
+  password: "",
+  role: "",
+};
 
-//   try {
-//     const response = await (
-//       await fetch(
-//         "https://sistemadegestioneducarparatransformar-elianarism.b4a.run/api/auth/login",
-//         {
-//           method: "POST",
-//           body: JSON.stringify(usuariosObject),
-//           headers: {
-//             "Content-Type": "application/json",
-//           },
-//         }
-//       )
-//     ).json();
+async function login(event) {
+  event.preventDefault();
 
-//     // if (!response.ok) {
-//     //   Swal.fire("Error", response.error.message, "error");
-//     //   return;
-//     // }
+  try {
+    const response = await (
+      await fetch(
+        "https://sistemadegestioneducarparatransformar-elianarism.b4a.run/api/auth/login",
+        {
+          method: "POST",
+          body: JSON.stringify(usuariosObject),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+    ).json();
 
-//     localStorage.setItem("x-token-ept", response.data);
-//     router.push({ path: "home" });
-//   } catch (error) {
-//     // Swal.fire(
-//     //   "Error",
-//     //   error?.status === 400
-//     //     ? "Credenciales incorrectas"
-//     //     : error?.status === 404
-//     //     ? "Usuario no encontrado con este DNI o contraseña"
-//     //     : "algo salio mal",
-//     //   "error"
-//     // );
-//     console.log(error);
-//   }
-// }
+    if (!response.ok) {
+      Swal.fire("Error", response.error.message, "error");
+      return;
+    }
+
+    localStorage.setItem("x-token-ept", response.data);
+    router.push({ path: "home" });
+  } catch (error) {
+    Swal.fire(
+      "Error",
+      error?.status === 400
+        ? "Credenciales incorrectas"
+        : error?.status === 404
+        ? "Usuario no encontrado con este DNI o contraseña"
+        : "algo salio mal",
+      "error"
+    );
+    console.log(error);
+  }
+}
 </script>
 <template>
   <section>
