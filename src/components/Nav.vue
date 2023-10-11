@@ -3,8 +3,91 @@
 import { RouterLink } from "vue-router";
 </script>
 <template>
-  <div class="wrapper">
+  <nav class="navbar bg-body-tertiary fixed-top shadow-sm">
+    <div class="container-fluid">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasNavbar"
+        aria-controls="offcanvasNavbar"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <img src="../assets/logo.jpg" alt="Logo" class="logo" />
+      <div
+        class="offcanvas offcanvas-start vertical-nav"
+        tabindex="-1"
+        id="offcanvasNavbar"
+        aria-labelledby="offcanvasNavbarLabel"
+      >
+        <div class="offcanvas-header">
+          <img src="../assets/logo.jpg" alt="Logo" class="logo" />
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <li class="nav-link">
+              <RouterLink to=""
+                ><i class="bi bi-house-fill icons"></i> Home</RouterLink
+              >
+            </li>
+            <li class="nav-link">
+              <RouterLink to=""
+                ><i class="bi bi-person icons"></i> Perfil</RouterLink
+              >
+            </li>
+            <li class="nav-link">
+              <RouterLink to=""
+                ><i class="bi bi-backpack2 icons"></i> Boletin</RouterLink
+              >
+            </li>
+            <li class="nav-link">
+              <RouterLink to="/pay-fee"
+                ><i class="bi bi-bank icons"></i> Pagos</RouterLink
+              >
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <i class="bi bi-book icons"></i> Listas
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Alumnos</a></li>
+                <li><a class="dropdown-item" href="#">Profesores</a></li>
+                <li>
+                  <a class="dropdown-item" href="#">otra cosa</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <div class="social-media">
+            <a
+              href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel"
+              target="_blank"
+              ><i class="bi bi-github icons"></i
+            ></a>
+            <a href="" target="_blank"><i class="bi bi-linkedin icons"></i></a>
+            <a href=""><i class="bi bi-whatsapp icons"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <!-- <div class="wrapper">
     <div class="vertical-nav shadow-lg">
+      <img src="../assets/logo.jpg" alt="Logo" class="logo" />
       <h2>Menu</h2>
       <ul>
         <li class="nav-link">
@@ -26,7 +109,9 @@ import { RouterLink } from "vue-router";
           >
         </li>
         <li class="nav-link">
-          <RouterLink to=""><i class="bi bi-bank icons"></i> Pagos</RouterLink>
+          <RouterLink to="/pay-fee"
+            ><i class="bi bi-bank icons"></i> Pagos</RouterLink
+          >
         </li>
         <li class="nav-link">
           <RouterLink to="/login"
@@ -41,7 +126,7 @@ import { RouterLink } from "vue-router";
       </div>
       <div class="p-4"></div>
     </div>
-  </div>
+  </div> -->
 </template>
 <style lang="scss" scoped>
 template {
@@ -57,40 +142,50 @@ a {
     color: aquamarine;
     transform: scale(1.05);
     transition: 0.2s;
+    // Holasg
   }
 }
-.wrapper {
-  display: flex;
-  position: relative;
-  box-sizing: border-box;
-}
-.wrapper .vertical-nav {
+.vertical-nav {
   text-decoration: none;
-  position: fixed;
-  width: 300px;
-  height: 100%;
-  background: linear-gradient(150deg, #f18597, #0097b8);
-  padding: 30px 0;
+  background: linear-gradient(150deg, #999697, #0097b8);
+  list-style: none;
 }
-.wrapper .vertical-nav h2 {
+.vertical-nav h2 {
   color: aquamarine;
   text-transform: uppercase;
-  text-align: center;
+  text-align: start;
   margin-bottom: 20px;
 }
-.wrapper .vertical-nav ul .nav-link {
-  list-style: none;
+.vertical-nav .nav-link {
   padding: 15px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid rgba(151, 151, 151, 0.05);
+  text-align: start;
 }
-.wrapper .vertical-nav ul li a {
+.vertical-nav ul li a {
   display: block;
 }
-.wrapper .vertical-nav ul li a .icons {
+.vertical-nav ul li a .icons {
   width: 25px;
 }
-// .wrapper .vertical-nav ul li:hover {
-//   // background: #594f8d;
+.logo {
+  max-height: 50px;
+  border-radius: 50%;
+}
+.vertical-nav .social-media {
+  bottom: 0;
+  position: absolute;
+  display: flex;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.vertical-nav .social-media a {
+  display: block;
+  width: 40px;
+  height: 40px;
+}
+
+// .vertical-nav ul li:hover {
+//   background: #71ad80;
 // }
 </style>

@@ -70,6 +70,8 @@ async function login(event) {
             <option value="student">Estudiante</option>
             <option value="professor">Profesor</option>
             <option value="parent">Padres</option>
+            <option value="Director">Director/Autoridad</option>
+            <option value="Admin">Admin</option>
           </select>
         </div>
         <input type="submit" value="Iniciar" />
@@ -85,14 +87,14 @@ section {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(150deg, #c789fc, #0097b8);
+  background: linear-gradient(150deg, #f9f8fa, #0097b8);
 }
 .formulario {
   width: 90%;
   max-width: 400px;
   border-radius: 10px;
   margin: auto;
-  background-color: rgb(132, 86, 171);
+  background: linear-gradient(150deg, #888688, #f9f8fa);
   box-shadow: 0 5px 10px -5px rgb(0 0 0 / 30%);
   text-align: center;
   padding: 2px;
@@ -100,7 +102,7 @@ section {
 .formulario h1 {
   color: white;
   text-align: center;
-  padding: 0 0 20px 0;
+  padding: 10px 0 15px 0;
   border-bottom: 1px solid silver;
 }
 
@@ -140,47 +142,34 @@ form .username {
   left: 0;
   width: 100%;
   height: 2px;
-  background: #820ebd;
+  background: #0ca7d6;
   // transition: .5s;
 }
 .username input:focus ~ label,
 .username input:valid ~ label {
   top: -5px;
-  color: #820ebd;
+  color: #d60c89;
 }
 .username input:focus ~ span::before,
 .username input:focus ~ span::before {
   width: 100%;
 }
 
-.recordar {
-  margin: -5px 0 20px 5px;
-  color: blue;
-  cursor: pointer;
-}
 input[type="submit"] {
   width: 100%;
   height: 50px;
   border: 1px solid;
-  background: #820ebd;
+  background: #d60c89;
   border-radius: 25px;
   font-size: 18px;
   color: white;
   cursor: pointer;
   outline: none;
+  margin-bottom: 15px;
 }
 
 input[type="submit"]:hover {
-  border-color: #20ba33;
+  border-color: #0ca7d6;
   transition: 0.5s;
-}
-.registrarse {
-  margin: 30px 0;
-  text-align: center;
-  font-size: 16px;
-  color: white;
-}
-.registrarse a:hover {
-  text-decoration: underline;
 }
 </style>

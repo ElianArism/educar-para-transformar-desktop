@@ -1,5 +1,7 @@
 <script setup>
 import { format } from "date-fns";
+import { useRouter } from "vue-router";
+const router = useRouter();
 
 const paidFee = {
   value: 1000,
@@ -17,6 +19,7 @@ const validateDate = (event) => {
 
 const submitForm = (event) => {
   event.preventDefault();
+  router.push({ path: "/pay-fee" });
 };
 </script>
 
@@ -24,7 +27,7 @@ const submitForm = (event) => {
   <div class="container-fluid">
     <h2>Pagar cuota de estudiante</h2>
 
-    <form class="bg-secondary rounded p-3 text-white">
+    <form @submit="submitForm" class="bg-secondary rounded p-3 text-white">
       <div class="mb-3">
         <label for="fee-value" class="form-label">Monto de la cuota</label>
         <div class="input-group">
@@ -54,7 +57,7 @@ const submitForm = (event) => {
       </div>
 
       <div class="mb-3">
-        <button class="btn btn-primary" @submit="submitForm">Confirmar</button>
+        <button class="btn btn-primary" type="submit">Confirmar</button>
       </div>
     </form>
   </div>
