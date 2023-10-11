@@ -4,52 +4,44 @@ import Nav from "./Nav.vue";
 
 <template>
   <div class="container-fluid">
-    <div class="row">
-      <div class="col-4 p-0">
-        <Nav />
-      </div>
-      <div class="col p-3">
-        <div class="hello">
-          <h3>Sistema de gestion educar para transformar - Desktop</h3>
-          <h5>Trabajo en proceso</h5>
-          <h6>Tecnologias usadas</h6>
-          <ul>
-            <li>
-              <a
-                href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel"
-                target="_blank"
-                rel="noopener"
-                >babel</a
-              >
-            </li>
-            <li>
-              <a
-                href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-router"
-                target="_blank"
-                rel="noopener"
-                >router</a
-              >
-            </li>
-            <li>
-              <a
-                href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-vuex"
-                target="_blank"
-                rel="noopener"
-                >vuex</a
-              >
-            </li>
-            <li>
-              <a
-                href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint"
-                target="_blank"
-                rel="noopener"
-                >eslint</a
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
+    <Nav />
+    <h3>Sistema de gestion educar para transformar - Desktop</h3>
+    <h5>Trabajo en proceso</h5>
+    <h6>Tecnologias usadas</h6>
+    <ul>
+      <li>
+        <a
+          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel"
+          target="_blank"
+          rel="noopener"
+          >babel</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-router"
+          target="_blank"
+          rel="noopener"
+          >router</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-vuex"
+          target="_blank"
+          rel="noopener"
+          >vuex</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint"
+          target="_blank"
+          rel="noopener"
+          >eslint</a
+        >
+      </li>
+    </ul>
   </div>
 </template>
 
