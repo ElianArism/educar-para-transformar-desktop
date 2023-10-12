@@ -3,7 +3,7 @@
 import { RouterLink } from "vue-router";
 </script>
 <template>
-  <nav class="navbar bg-body-tertiary fixed-top shadow-sm">
+  <nav class="navbar bg-body-tertiary shadow-sm">
     <div class="container-fluid">
       <button
         class="navbar-toggler"
@@ -85,55 +85,8 @@ import { RouterLink } from "vue-router";
       </div>
     </div>
   </nav>
-  <!-- <div class="wrapper">
-    <div class="vertical-nav shadow-lg">
-      <img src="../assets/logo.jpg" alt="Logo" class="logo" />
-      <h2>Menu</h2>
-      <ul>
-        <li class="nav-link">
-          <RouterLink to=""
-            ><i class="bi bi-house-fill icons"></i> Home</RouterLink
-          >
-        </li>
-        <li class="nav-link">
-          <RouterLink to=""
-            ><i class="bi bi-person icons"></i> Perfil</RouterLink
-          >
-        </li>
-        <li class="nav-link">
-          <RouterLink to=""><i class="bi bi-book icons"></i> Listas</RouterLink>
-        </li>
-        <li class="nav-link">
-          <RouterLink to=""
-            ><i class="bi bi-backpack2 icons"></i> Boletin</RouterLink
-          >
-        </li>
-        <li class="nav-link">
-          <RouterLink to="/pay-fee"
-            ><i class="bi bi-bank icons"></i> Pagos</RouterLink
-          >
-        </li>
-        <li class="nav-link">
-          <RouterLink to="/login"
-            ><i class="bi bi-house-fill icons"></i> Iniciar Sesión</RouterLink
-          >
-        </li>
-      </ul>
-    </div>
-    <div class="down-nav">
-      <div class="title-down">
-        <p></p>
-      </div>
-      <div class="p-4"></div>
-    </div>
-  </div> -->
 </template>
 <style lang="scss" scoped>
-template {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 a {
   text-decoration: none;
   color: black;

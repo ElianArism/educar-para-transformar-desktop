@@ -1,33 +1,56 @@
 <script setup>
-import { format } from "date-fns";
-import { useRouter } from "vue-router";
+import { format, sub } from "date-fns";
+import Swal from "sweetalert2";
+import { useRoute, useRouter } from "vue-router";
+import { StudentService } from "../services/student.service";
+
 const router = useRouter();
+const studentId = useRoute().params.studentId;
+const studentsService = new StudentService();
+const minDate = new Date(
+  format(sub(new Date(), { years: 10, days: 7 }), "yyyy'-'MM'-'dd") + "T00:00"
+);
+const maxDate = new Date(format(new Date(), "yyyy'-'MM'-'dd") + "T00:00");
 
 const paidFee = {
-  value: 1000,
-  paymentDate: "",
+  value: 5000,
+  paymentDate: format(new Date(), "yyyy'-'MM'-'dd"),
 };
 
 const validateDate = (event) => {
-  const minDate = new Date(format(new Date(), "yyyy'-'MM'-'dd") + "T00:00");
   const date = new Date(event.target.value + "T00:00");
-  if (date < minDate) {
+
+  if (date < minDate || date > maxDate)
     event.target.value = format(new Date(), "yyyy'-'MM'-'dd");
-    return;
-  }
+
+  paidFee.paymentDate = date.toISOString();
 };
 
-const submitForm = (event) => {
+const submitForm = async (event) => {
   event.preventDefault();
+
+  if (paidFee.paymentDate === "") return;
+
+  const response = await studentsService.payStudentFee(studentId, paidFee);
+
+  if (!response.ok) {
+    Swal.fire("Error", "", "error");
+    console.log("error", response);
+    return;
+  }
+
   router.push({ path: "/pay-fee" });
 };
 </script>
 
 <template>
-  <div class="container-fluid">
-    <h2>Pagar cuota de estudiante</h2>
+  <div class="container-fluid p-3">
+    <h4>Pagar cuota de estudiante</h4>
 
-    <form @submit="submitForm" class="bg-secondary rounded p-3 text-white">
+    <form
+      @submit="submitForm"
+      class="bg-secondary rounded w-75 mx-auto p-3 my-5 text-white"
+    >
       <div class="mb-3">
         <label for="fee-value" class="form-label">Monto de la cuota</label>
         <div class="input-group">
@@ -51,7 +74,8 @@ const submitForm = (event) => {
           class="form-control"
           v-model="paidFee.paymentDate"
           placeholder="Ingrese el monto de la cuota a pagar"
-          min="{{ new Date() }}"
+          min="{{ minDate }}"
+          max="{{ maxDate }}"
           @change="validateDate"
         />
       </div>
