@@ -1,10 +1,7 @@
-<script setup>
-import Nav from "./Nav.vue";
-</script>
+<script setup></script>
 
 <template>
   <div class="container-fluid">
-    <Nav />
     <h3>Sistema de gestion educar para transformar - Desktop</h3>
     <h5>Trabajo en proceso</h5>
     <h6>Tecnologias usadas</h6>

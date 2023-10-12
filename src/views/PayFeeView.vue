@@ -1,9 +1,32 @@
 <script setup>
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
+import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
+import { CoursesService } from "../services/courses.service";
+import { StudentService } from "../services/student.service";
 
 const router = useRouter();
+const coursesService = new CoursesService();
+const studentsService = new StudentService();
+
+const courses = ref([]);
+const students = ref([]);
+
+const getCourses = async () => {
+  const { data } = await coursesService.getCourses();
+  courses.value = data.courses;
+};
+
+const initStudentList = async () => {
+  const { data } = await studentsService.getStudents();
+  students.value = data;
+};
+
+onMounted(() => {
+  initStudentList();
+  getCourses();
+});
 </script>
 
 <template>
@@ -23,11 +46,15 @@ const router = useRouter();
       <div class="col-12">
         <h5>Filtros</h5>
         <div class="d-flex">
-          <select class="form-select">
-            <option value="Curso 1">Curso 1</option>
-            <option value="Curso 2">Curso 2</option>
-            <option value="Curso 3">Curso 3</option>
-            <option value="Curso 4">Curso 4</option>
+          <select class="form-select" v-if="courses.length > 0">
+            <option value="-">Seleccione una opcion</option>
+            <option
+              :key="index"
+              :value="item.name"
+              v-for="(item, index) of courses"
+            >
+              {{ item.name }}
+            </option>
           </select>
           <button class="mx-2 btn btn-primary">Buscar</button>
         </div>
@@ -74,7 +101,6 @@ const router = useRouter();
             aria-labelledby="heading1"
             class="accordion-collapse collapse"
           >
-            <!-- Here must be another list -->
             <div class="accordion-body">
               <div class="w-100 d-flex">
                 <button

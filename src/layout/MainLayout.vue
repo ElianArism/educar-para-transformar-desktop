@@ -1,5 +1,6 @@
 <template>
   <div class="container-fluid">
+    <Nav />
     <div class="row">
       <div class="col">
         <router-view />
@@ -8,7 +9,9 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import Nav from "../components/Nav.vue";
+</script>
 
 <style lang="scss" scoped>
 .container-fluid {
