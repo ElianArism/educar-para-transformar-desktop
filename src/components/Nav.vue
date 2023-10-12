@@ -64,7 +64,11 @@ import { RouterLink } from "vue-router";
                 <i class="bi bi-book icons"></i> Listas
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Alumnos</a></li>
+                <li>
+                  <RouterLink to="/list-alumno" class="dropdown-item"
+                    >Alumnos</RouterLink
+                  >
+                </li>
                 <li><a class="dropdown-item" href="#">Profesores</a></li>
                 <li>
                   <a class="dropdown-item" href="#">otra cosa</a>
@@ -85,48 +89,6 @@ import { RouterLink } from "vue-router";
       </div>
     </div>
   </nav>
-  <!-- <div class="wrapper">
-    <div class="vertical-nav shadow-lg">
-      <img src="../assets/logo.jpg" alt="Logo" class="logo" />
-      <h2>Menu</h2>
-      <ul>
-        <li class="nav-link">
-          <RouterLink to=""
-            ><i class="bi bi-house-fill icons"></i> Home</RouterLink
-          >
-        </li>
-        <li class="nav-link">
-          <RouterLink to=""
-            ><i class="bi bi-person icons"></i> Perfil</RouterLink
-          >
-        </li>
-        <li class="nav-link">
-          <RouterLink to=""><i class="bi bi-book icons"></i> Listas</RouterLink>
-        </li>
-        <li class="nav-link">
-          <RouterLink to=""
-            ><i class="bi bi-backpack2 icons"></i> Boletin</RouterLink
-          >
-        </li>
-        <li class="nav-link">
-          <RouterLink to="/pay-fee"
-            ><i class="bi bi-bank icons"></i> Pagos</RouterLink
-          >
-        </li>
-        <li class="nav-link">
-          <RouterLink to="/login"
-            ><i class="bi bi-house-fill icons"></i> Iniciar Sesión</RouterLink
-          >
-        </li>
-      </ul>
-    </div>
-    <div class="down-nav">
-      <div class="title-down">
-        <p></p>
-      </div>
-      <div class="p-4"></div>
-    </div>
-  </div> -->
 </template>
 <style lang="scss" scoped>
 template {
