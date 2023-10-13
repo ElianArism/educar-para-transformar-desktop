@@ -1,8 +1,14 @@
 <script setup>
-import Nav from "../components/Nav.vue";
+// let alumno = {
+//   id: "",
+//   name: "",
+//   lastName: "",
+//   password: "",
+//   birthDate: "",
+//   role: "student",
+// };
 </script>
 <template>
-  <Nav />
   <section class="cuerpo">
     <div class="container-table">
       <table>
@@ -51,7 +57,7 @@ import Nav from "../components/Nav.vue";
     </div>
   </section>
 </template>
-<style lang="scss">
+<style lang="scss" scoped>
 .cuerpo {
   display: flex;
   align-items: center;

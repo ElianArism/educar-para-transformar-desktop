@@ -3,7 +3,7 @@
 import { RouterLink } from "vue-router";
 </script>
 <template>
-  <nav class="navbar bg-body-tertiary fixed-top shadow-sm">
+  <nav class="navbar bg-body-tertiary shadow-sm">
     <div class="container-fluid">
       <button
         class="navbar-toggler"
@@ -91,11 +91,6 @@ import { RouterLink } from "vue-router";
   </nav>
 </template>
 <style lang="scss" scoped>
-template {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 a {
   text-decoration: none;
   color: black;
