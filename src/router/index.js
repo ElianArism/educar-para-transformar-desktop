@@ -40,6 +40,14 @@ const routes = [
           ),
       },
       {
+        path: "/list-alumno",
+        name: "list-alumno",
+        component: () =>
+          import(
+            /* webpackChunkName: "ListAlumno" */ "../views/ListAlumnoView.vue"
+          ),
+      },
+      {
         path: "/",
         redirect: "home",
       },

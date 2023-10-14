@@ -141,7 +141,7 @@ const filterStudentsByDNI = (event) => {
             aria-labelledby="heading1"
             class="accordion-collapse collapse"
           >
-            <div class="accordion-body">
+            <ul class="accordion-body">
               <div class="w-100 d-flex">
                 <button
                   class="btn w-75 m-auto mb-3 btn-info"
@@ -171,8 +171,27 @@ const filterStudentsByDNI = (event) => {
                     }}
                   </span>
                 </div>
+                <ul class="list-group">
+                  <div
+                    class="list-group-item list-group-item-info d-flex align-items-center"
+                  >
+                    <span class="badge bg-success"> Pagado </span>
+                    &nbsp;
+                    <span>
+                      {{
+                        format(
+                          new Date(),
+                          "'Cuota pagada el dia' eeee mm 'de' LLLL 'del' yyyy",
+                          {
+                            locale: es,
+                          }
+                        )
+                      }}
+                    </span>
+                  </div>
+                </ul>
               </ul>
-            </div>
+            </ul>
           </div>
         </div>
       </div>

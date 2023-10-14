@@ -64,7 +64,11 @@ import { RouterLink } from "vue-router";
                 <i class="bi bi-book icons"></i> Listas
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Alumnos</a></li>
+                <li>
+                  <RouterLink to="/list-alumno" class="dropdown-item"
+                    >Alumnos</RouterLink
+                  >
+                </li>
                 <li><a class="dropdown-item" href="#">Profesores</a></li>
                 <li>
                   <a class="dropdown-item" href="#">otra cosa</a>
