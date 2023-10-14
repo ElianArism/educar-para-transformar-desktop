@@ -7,7 +7,7 @@ export class StudentService extends BaseService {
 
   async getStudents() {
     try {
-      const response = await fetch(`${this._localUrl}/users/all/student`);
+      const response = await fetch(`${this._url}/users/all/student`);
       return await response.json();
     } catch (error) {
       console.log(error);
@@ -18,7 +18,7 @@ export class StudentService extends BaseService {
     try {
       const headers = new Headers();
       headers.append("Content-Type", "application/json");
-      const response = await fetch(`${this._localUrl}/users/student/fees`, {
+      const response = await fetch(`${this._url}/users/student/fees`, {
         method: "PUT",
         headers,
         body: JSON.stringify({

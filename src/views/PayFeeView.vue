@@ -1,5 +1,5 @@
 <script setup>
-import { format } from "date-fns";
+import { addDays, format } from "date-fns";
 import { es } from "date-fns/locale";
 import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
@@ -16,7 +16,11 @@ const studentsBackup = ref([]);
 
 const getCourses = async () => {
   const { data } = await coursesService.getCourses();
-  courses.value = data.courses;
+  const mappedCourses = data.courses.map((c) => {
+    c.students = c.students.map((s) => s.studentInfo);
+    return c;
+  });
+  courses.value = mappedCourses;
 };
 
 const initStudentList = async () => {
@@ -60,7 +64,7 @@ const filterStudentsByDNI = (event) => {
     <div class="row">
       <div class="col">
         <div
-          class="mb-5 d-flex flex-column align-items-center justify-content-center p-1"
+          class="my-3 d-flex flex-column align-items-center justify-content-center p-1"
         >
           <h5 class="m-0">Pagar cuota</h5>
           <hr class="m-0 w-25" />
@@ -123,7 +127,10 @@ const filterStudentsByDNI = (event) => {
                 class="d-flex justify-content-between w-100"
                 style="padding-right: 10px"
               >
-                <span> {{ student.name }} {{ student.lastName }} </span>
+                <span>
+                  {{ student.name }}
+                  {{ student.lastName }}
+                </span>
                 <span> DNI: {{ student.id }} </span>
               </span>
             </button>
@@ -155,7 +162,7 @@ const filterStudentsByDNI = (event) => {
                   <span>
                     {{
                       format(
-                        new Date(fee.paymentDate),
+                        addDays(new Date(fee.paymentDate), 1),
                         "'Cuota pagada el dia' dd 'de' LLLL 'del' yyyy",
                         {
                           locale: es,

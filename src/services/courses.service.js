@@ -6,7 +6,7 @@ export class CoursesService extends BaseService {
   }
   async getCourses() {
     try {
-      const response = await fetch(`${this._localUrl}/courses`);
+      const response = await fetch(`${this._url}/courses`);
       return await response.json();
     } catch (error) {
       console.log(error);
