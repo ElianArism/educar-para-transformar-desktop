@@ -71,7 +71,9 @@ import { RouterLink } from "vue-router";
                 </li>
                 <li><a class="dropdown-item" href="#">Profesores</a></li>
                 <li>
-                  <a class="dropdown-item" href="#">otra cosa</a>
+                  <RouterLink to="/cuotas-impagas" class="dropdown-item"
+                    >Cuotas Impagas</RouterLink
+                  >
                 </li>
               </ul>
             </li>

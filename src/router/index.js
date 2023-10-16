@@ -48,6 +48,14 @@ const routes = [
           ),
       },
       {
+        path: "/cuotas-impagas",
+        name: "cuotas-impagas",
+        component: () =>
+          import(
+            /* webpackChunkName: "CuotasImpagas" */ "../views/UnpaidFeesList.vue"
+          ),
+      },
+      {
         path: "/",
         redirect: "home",
       },

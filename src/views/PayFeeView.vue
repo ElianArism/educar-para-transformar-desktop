@@ -1,50 +1,12 @@
 <script setup>
 import { addDays, format } from "date-fns";
 import { es } from "date-fns/locale";
-import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
-import { CoursesService } from "../services/courses.service";
-import { StudentService } from "../services/student.service";
+import { useStudentFees } from "../hooks/useStudentFees";
 
 const router = useRouter();
-const coursesService = new CoursesService();
-const studentsService = new StudentService();
-
-const courses = ref([]);
-const students = ref([]);
-const studentsBackup = ref([]);
-
-const getCourses = async () => {
-  const { data } = await coursesService.getCourses();
-  const mappedCourses = data.courses.map((c) => {
-    c.students = c.students.map((s) => s.studentInfo);
-    return c;
-  });
-  courses.value = mappedCourses;
-};
-
-const initStudentList = async () => {
-  const { data } = await studentsService.getStudents();
-  students.value = data;
-  studentsBackup.value = data;
-};
-
-onMounted(() => {
-  initStudentList();
-  getCourses();
-});
-
-const filterStudentsBySelectOption = (event) => {
-  const filter = event.target.value;
-
-  if (filter === "todos") {
-    students.value = studentsBackup.value;
-    return;
-  }
-
-  const [course] = courses.value.filter(({ name }) => filter === name);
-  students.value = course.students;
-};
+const { students, courses, filterStudentsBySelectOption, studentsBackup } =
+  useStudentFees();
 
 const filterStudentsByDNI = (event) => {
   const dni = event.target.value?.trim();
@@ -54,7 +16,6 @@ const filterStudentsByDNI = (event) => {
   const filteredStudents = studentsBackup.value.filter((student) =>
     student.id.includes(dni)
   );
-
   students.value = filteredStudents;
 };
 </script>
