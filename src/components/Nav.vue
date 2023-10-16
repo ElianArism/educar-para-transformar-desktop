@@ -53,27 +53,10 @@ import { RouterLink } from "vue-router";
                 ><i class="bi bi-bank icons"></i> Pagos</RouterLink
               >
             </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
+            <li class="nav-link">
+              <RouterLink to="/list-alumno" class="dropdown-item"
+                ><i class="bi bi-book icons"></i> Listado</RouterLink
               >
-                <i class="bi bi-book icons"></i> Listas
-              </a>
-              <ul class="dropdown-menu">
-                <li>
-                  <RouterLink to="/list-alumno" class="dropdown-item"
-                    >Alumnos</RouterLink
-                  >
-                </li>
-                <li><a class="dropdown-item" href="#">Profesores</a></li>
-                <li>
-                  <a class="dropdown-item" href="#">otra cosa</a>
-                </li>
-              </ul>
             </li>
           </ul>
           <div class="social-media">
