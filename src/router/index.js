@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory } from "vue-router";
+import BoletinView from "../views/BoletinView.vue";
 
 const routes = [
   {
@@ -24,6 +25,11 @@ const routes = [
         name: "about",
         component: () =>
           import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
+      },
+      {
+        path: "/boletin",
+        name: "Boletin",
+        component: BoletinView,
       },
       {
         path: "/pay-fee",
