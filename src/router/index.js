@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import Boletin from "@/components/Boletin.vue";
 
 const routes = [
   {

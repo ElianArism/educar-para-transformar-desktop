@@ -16,7 +16,7 @@
     "date-fns": "^2.30.0",
     "sweetalert2": "^11.7.32",
     "vue": "^3.2.13",
-    "vue-router": "^4.0.3",
+    "vue-router": "^4.2.5",
     "vuex": "^4.0.0"
   },
   "devDependencies": {

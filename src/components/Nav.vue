@@ -22,7 +22,7 @@ import { RouterLink } from "vue-router";
           <RouterLink to=""><i class="bi bi-book icons"></i> Listas</RouterLink>
         </li>
         <li class="nav-link">
-          <RouterLink to=""
+          <RouterLink to="/boletin"
             ><i class="bi bi-backpack2 icons"></i> Boletin</RouterLink
           >
         </li>
