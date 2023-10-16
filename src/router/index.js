@@ -56,6 +56,14 @@ const routes = [
           ),
       },
       {
+        path: "/notasAlumnos",
+        name: "notasAlumnos",
+        component: () =>
+          import(
+            /* webpackChunkName: "notasAlumno" */ "../views/NotasAlumnoView.vue"
+          ),
+      },
+      {
         path: "/",
         redirect: "home",
       },

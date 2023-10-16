@@ -53,9 +53,9 @@ import { RouterLink } from "vue-router";
                 ><i class="bi bi-bank icons"></i> Pagos</RouterLink
               >
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-link">
               <a
-                class="nav-link dropdown-toggle"
+                class="dropdown-toggle"
                 href="#"
                 role="button"
                 data-bs-toggle="dropdown"
@@ -66,7 +66,7 @@ import { RouterLink } from "vue-router";
               <ul class="dropdown-menu">
                 <li>
                   <RouterLink to="/list-alumno" class="dropdown-item"
-                    >Alumnos</RouterLink
+                    >Listado de Alumnos</RouterLink
                   >
                 </li>
                 <li><a class="dropdown-item" href="#">Profesores</a></li>

@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import { StudentService } from "../services/student.service";
 let alumnos = ref([]);
+
 const servicioStudent = new StudentService();
 
 const initStudentList = async () => {
@@ -9,6 +10,14 @@ const initStudentList = async () => {
   alumnos.value = data;
 };
 initStudentList();
+
+// async function CargarNotasAlumno (event){
+//     event.preventDefault();{
+//         fetch(""){
+//             method: "POST"
+//         }
+//     }
+// }
 </script>
 <template>
   <section class="cuerpo">
@@ -20,7 +29,8 @@ initStudentList();
         placeholder="Buscar  Alumno"
         @input="filterStudentsByDNI"
       />
-      <h2>Tablas</h2>
+
+      <h2>Notas</h2>
       <p>Filtro por curso</p>
       <select class="form-select" aria-label="Default select example">
         <option selected>Elegir curso</option>
@@ -36,12 +46,14 @@ initStudentList();
             <th>Id</th>
             <th>Nombre</th>
             <th>Apellido</th>
-            <th>Fecha de Nacimiento</th>
             <th>Nota 1</th>
             <th>Nota 2</th>
             <th>Nota 3</th>
+            <th>Recu 1</th>
+            <th>Recu 2</th>
+            <th>Recu 3</th>
             <th>Nota Final</th>
-            <th>Agregar Nota</th>
+            <th>Cargar notas</th>
           </tr>
         </thead>
         <tbody>
@@ -55,27 +67,15 @@ initStudentList();
             <td>
               {{ Alumno.lastName }}
             </td>
+            <td><input type="number" class="Notas" min="1" max="10" /></td>
+            <td><input type="number" class="Notas" min="1" max="10" /></td>
+            <td><input type="number" class="Notas" min="1" max="10" /></td>
+            <td><input type="number" class="Notas" min="1" max="10" /></td>
+            <td><input type="number" class="Notas" min="1" max="10" /></td>
+            <td><input type="number" class="Notas" min="1" max="10" /></td>
+            <td>Promedio</td>
             <td>
-              {{ Alumno.birthDate }}
-            </td>
-            <td>
-              {{ Alumno.role }}
-            </td>
-            <td>
-              {{ Alumno.role }}
-            </td>
-            <td>
-              {{ Alumno.role }}
-            </td>
-            <td>
-              {{ Alumno.role }}
-            </td>
-            <td>
-              <RouterLink to="/notasAlumnos"
-                ><button type="button" class="btn btn-info">
-                  Agregar Nota
-                </button></RouterLink
-              >
+              <button type="Submit" class="btn btn-info">Cargar Notas</button>
             </td>
           </tr>
         </tbody>
@@ -96,12 +96,12 @@ initStudentList();
 }
 .seleccion-cursos h2 {
   text-transform: uppercase;
-  color: #91bdff;
+  color: #b9aaff;
   border-bottom: solid 1px rgb(155, 155, 155, 0.4);
 }
 .seleccion-cursos p {
   text-transform: uppercase;
-  color: #91bdff;
+  color: #b9aaff;
 }
 
 .container-table {
@@ -114,7 +114,7 @@ table {
   border-collapse: collapse;
 }
 thead {
-  background: #91bdff;
+  background: #b9aaff;
 }
 .logo {
   max-height: 40px;
@@ -143,11 +143,14 @@ tbody tr:hover {
   -moz-box-shadow: 1px 10px 22px -12px rgba(0, 0, 0, 0.63);
   box-shadow: 1px 10px 22px -12px rgba(0, 0, 0, 0.63);
 }
+.Notas {
+  max-width: 40px;
+}
 .btn-info {
-  background-color: #91bdff;
+  background-color: #b9aaff;
   border-color: silver;
   &:hover {
-    background-color: #63a2ff;
+    background-color: #a491fa;
     transition: 0.2s;
     // Holasg
   }
