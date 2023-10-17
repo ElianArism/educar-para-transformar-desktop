@@ -1,118 +1,105 @@
 <script setup>
+import { ProfessorService } from "@/services/professor.service";
 import { ref } from "vue";
-import { StudentService } from "../services/student.service";
-let alumnos = ref([]);
-const servicioStudent = new StudentService();
+const alumnos = ref([]);
+const courses = ref([]);
+const professorId = localStorage.getItem("user-id");
+const professorService = new ProfessorService();
 
 const initStudentList = async () => {
-  const { data } = await servicioStudent.getStudents();
-  alumnos.value = data;
+  courses.value = await professorService.getCoursesByProfessorId(professorId);
+  alumnos.value = await professorService.getStudentsByProfessorId(professorId);
 };
 initStudentList();
 </script>
 <template>
-  <section class="cuerpo">
-    <div class="seleccion-cursos">
-      <h2>Buscador</h2>
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Buscar  Alumno"
-        @input="filterStudentsByDNI"
-      />
-      <h2>Tablas</h2>
-      <p>Filtro por curso</p>
-      <select class="form-select" aria-label="Default select example">
-        <option selected>Elegir curso</option>
-        <option value="1">curso 1</option>
-        <option value="2">curso 2</option>
-        <option value="3">curso 3</option>
-      </select>
+  <section class="container-fluid">
+    <div class="row">
+      <div class="col p-4">
+        <h4><b>Listado de alumnos</b></h4>
+      </div>
     </div>
-    <div class="container-table" id="app">
-      <table>
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Fecha de Nacimiento</th>
-            <th>Nota 1</th>
-            <th>Nota 2</th>
-            <th>Nota 3</th>
-            <th>Nota Final</th>
-            <th>Agregar Nota</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="Alumno in alumnos" :key="Alumno">
-            <td>
-              {{ Alumno.id }}
-            </td>
-            <td>
-              {{ Alumno.name }}
-            </td>
-            <td>
-              {{ Alumno.lastName }}
-            </td>
-            <td>
-              {{ Alumno.birthDate }}
-            </td>
-            <td>
-              {{ Alumno.role }}
-            </td>
-            <td>
-              {{ Alumno.role }}
-            </td>
-            <td>
-              {{ Alumno.role }}
-            </td>
-            <td>
-              {{ Alumno.role }}
-            </td>
-            <td>
-              <RouterLink to="/notasAlumnos"
-                ><button type="button" class="btn btn-info">
-                  Agregar Nota
-                </button></RouterLink
-              >
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="row py-5 px-3">
+      <div class="col-3">
+        <div class="seleccion-cursos w-75 m-auto">
+          <h4>Buscador</h4>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Buscar  Alumno"
+            @input="filterStudentsByDNI"
+          />
+          <h4>Tablas</h4>
+          <p>Filtro por curso</p>
+          <select class="form-select" aria-label="Default select example">
+            <option selected>Elegir curso</option>
+            <option value="1">curso 1</option>
+            <option value="2">curso 2</option>
+            <option value="3">curso 3</option>
+          </select>
+        </div>
+      </div>
+      <div class="col">
+        <table class="table">
+          <thead>
+            <th class="p-2">Id</th>
+            <th class="p-2">Nombre</th>
+            <th class="p-2">Apellido</th>
+            <th class="p-2">Fecha de Nacimiento</th>
+            <th class="p-2">Nota 1</th>
+            <th class="p-2">Nota 2</th>
+            <th class="p-2">Nota 3</th>
+            <th class="p-2">Nota Final</th>
+            <th class="p-2">Agregar Nota</th>
+          </thead>
+          <tbody>
+            <tr v-for="Alumno in alumnos" :key="Alumno">
+              <td>
+                {{ Alumno.studentInfo.id }}
+              </td>
+              <td>
+                {{ Alumno.studentInfo.name }}
+              </td>
+              <td>
+                {{ Alumno.studentInfo.lastName }}
+              </td>
+              <td>
+                {{ Alumno.studentInfo.birthDate }}
+              </td>
+              <td>
+                {{ Alumno.studentInfo.role }}
+              </td>
+              <td>
+                {{ Alumno.studentInfo.role }}
+              </td>
+              <td>
+                {{ Alumno.studentInfo.role }}
+              </td>
+              <td>
+                {{ Alumno.studentInfo.role }}
+              </td>
+              <td>
+                <RouterLink to="/notasAlumnos"
+                  ><button type="button" class="btn btn-info">
+                    Agregar Nota
+                  </button></RouterLink
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </section>
 </template>
 <style lang="scss" scoped>
-.cuerpo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background: linear-gradient(#ffff, rgb(155, 154, 154));
-}
 .seleccion-cursos {
-  margin-right: 50px;
-}
-.seleccion-cursos h2 {
-  text-transform: uppercase;
-  color: #91bdff;
-  border-bottom: solid 1px rgb(155, 155, 155, 0.4);
-}
-.seleccion-cursos p {
-  text-transform: uppercase;
-  color: #91bdff;
+  & h2,
+  & p {
+    text-transform: uppercase;
+  }
 }
 
-.container-table {
-  border: solid 1px rgb(155, 155, 155, 0.4);
-}
-table {
-  color: black;
-  font-size: 15px;
-  table-layout: fixed;
-  border-collapse: collapse;
-}
 thead {
   background: #91bdff;
 }
@@ -125,17 +112,6 @@ thead {
   margin-right: 5px;
 }
 
-th {
-  padding: 20px 15px;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-td {
-  padding: 15px;
-  border-bottom: solid 1px rgb(155, 155, 155, 0.4);
-  border-left: solid 1px rgb(155, 155, 155, 0.1);
-}
-
 tbody tr:hover {
   transform: scale(1.001);
   transition: 0.2s;
@@ -146,10 +122,10 @@ tbody tr:hover {
 .btn-info {
   background-color: #91bdff;
   border-color: silver;
+
   &:hover {
     background-color: #63a2ff;
     transition: 0.2s;
-    // Holasg
   }
 }
 .form-control {

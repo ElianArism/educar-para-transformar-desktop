@@ -15,7 +15,7 @@ import Nav from "../components/Nav.vue";
 
 <style lang="scss" scoped>
 .container-fluid {
-  min-height: 100%;
+  min-height: 100vh;
   width: 100%;
 }
 

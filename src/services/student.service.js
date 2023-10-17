@@ -7,8 +7,21 @@ export class StudentService extends BaseService {
 
   async getStudents() {
     try {
-      const response = await fetch(`${this._url}/users/all/student`);
-      return await response.json();
+      const response = await fetch(`${this._url}/courses`);
+      const { data } = await response.json();
+      return data.courses.flatMap((course) => course.students);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async getStudentById(studentId) {
+    try {
+      const response = await fetch(`${this._url}/courses`);
+      const { data } = await response.json();
+      const students = data.courses.flatMap((course) => course.students);
+      const student = students.filter((student) => student.id === studentId);
+      return student;
     } catch (error) {
       console.log(error);
     }
@@ -33,6 +46,24 @@ export class StudentService extends BaseService {
           ],
         }),
       });
+      return await response.json();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async updateStudentNotes(studentId, courseId, notes) {
+    try {
+      const headers = new Headers();
+      headers.append("Content-Type", "application/json");
+      const response = await fetch(
+        `${this._url}/courses/${courseId}/${studentId}`,
+        {
+          method: "PUT",
+          headers,
+          body: JSON.stringify(notes),
+        }
+      );
       return await response.json();
     } catch (error) {
       console.log(error);
