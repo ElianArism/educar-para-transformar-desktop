@@ -16,11 +16,21 @@ body,
 html {
   background: linear-gradient(#ffff, rgb(155, 154, 154)) no-repeat;
 }
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+
+@media print {
+  /* Hide elements not needed for printing */
+  header,
+  nav,
+  .no-print {
+    display: none !important;
+  }
 }
 </style>

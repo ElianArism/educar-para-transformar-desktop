@@ -1,94 +1,104 @@
 <script setup>
 /* eslint-disable */
 import { CoursesService } from "@/services/courses.service"; //API
+import { UserService } from "@/services/user.service";
 import { onMounted, ref } from "vue";
 
-const courses = ref([]);
 const courseService = new CoursesService();
-
+const userService = new UserService();
+const courses = ref([]);
 const studentNotas = ref({});
-
-const studentData = {
-  firstName: "Alisha",
-  lastName: "Lehmann",
-  cicloLectivo: "2023",
-};
+const userInfo = ref({});
+let user_id = localStorage.getItem("user-id");
+const user_role = localStorage.getItem("user-role");
+const isParent = ref(false);
 
 onMounted(async () => {
-  courses.value = (await courseService.getCourses()).data.courses;
+  let user = await userService.getByRoleAndId(user_role, user_id);
 
-  const user_id = localStorage.getItem("user-id");
+  if (user_role === "parent") {
+    user_id = user.son;
+    user = await userService.getByRoleAndId("student", user.son);
+    isParent.value = true;
+  }
 
-  const students = courses.value.flatMap((course) => course.students);
+  userInfo.value = user;
 
-  studentNotas.value = students.find((s) => s.studentInfo.id === user_id);
+  const httpCourses = (await courseService.getCourses()).data.courses;
+
+  courses.value = httpCourses.filter((c) => {
+    const found = c.students.find((s) => s.studentInfo.id === user_id);
+    if (found) {
+      c.students = found;
+      return c;
+    }
+  });
+
+  const students = courses.value
+    .flatMap((course) => course.students)
+    .filter((s) => s.studentInfo.id === user_id);
+
+  studentNotas.value = students;
 });
 
-const imprimirBoletin = () => {};
+const printPage = () => {
+  window.print();
+};
 </script>
 
 <template>
-  <div>
-    <div class="header">
-      <img class="logo" src="../assets/logo.jpg" alt="Logo" />
-      <div>
-        <p class="student-data">
-          {{ studentData.firstName }} {{ studentData.lastName }}, Ciclo Lectivo:
-          {{ studentData.cicloLectivo }}
-        </p>
-      </div>
+  <div class="container-fluid p-3">
+    <div class="d-flex m-4 justify-content-center align-items-center">
+      <img
+        class="logo mx-2"
+        src="../assets/logo.jpg"
+        alt="logo"
+        width="50"
+        height="50"
+      />
+      <p class="m-0 p-0">
+        <b>Boletin de: </b> {{ userInfo?.name }} {{ userInfo?.lastName }}
+        &nbsp;
+      </p>
+      <br />
+      <p class="m-0 p-0">Ciclo Lectivo 2023</p>
     </div>
     <table class="table">
       <thead>
         <tr>
-          <th>Trimestre/Materia</th>
-          <th v-for="materia in courses">{{ materia.name }}</th>
+          <th>Curso</th>
+          <th>Primer Trimestre</th>
+          <th>Segundo Trimestre</th>
+          <th>Tercer Trimestre</th>
+          <th>Nota final</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>N 1</td>
+        <tr :key="index" v-for="(course, index) of courses">
+          <td>{{ course.name }}</td>
           <td>
-            {{ studentNotas.value?.schoolGrades.firstTrimester }}
+            {{ course.students.schoolGrades.firstTrimester }}
           </td>
-        </tr>
-        <tr>
-          <td>N 2</td>
           <td>
-            {{ studentNotas.value?.schoolGrades.secondTrimester }}
+            {{ course.students.schoolGrades.secondTrimester }}
           </td>
-        </tr>
-        <tr>
-          <td>N 3</td>
           <td>
-            {{ studentNotas.value?.schoolGrades.thirdTrimester }}
+            {{ course.students.schoolGrades.thirdTrimester }}
           </td>
-        </tr>
-        <tr>
-          <td>Promedio</td>
           <td>
-            {{ studentNotas.value?.schoolGrades.finalGrade }}
+            {{ course.students.schoolGrades.finalGrade }}
           </td>
         </tr>
       </tbody>
     </table>
-    <button @click="imprimirBoletin">Imprimir</button>
+    <button class="no-print btn btn-primary" @click="printPage">
+      Imprimir
+    </button>
   </div>
 </template>
 
 <style scoped="scss">
-.header {
-  display: flex;
-  align-items: center;
-}
-.student-data {
-  font-weight: bold;
-  color: black;
-  align-items: center;
-}
-
 .logo {
-  margin-right: 50px;
-  width: 90px;
+  border-radius: 100%;
 }
 </style>

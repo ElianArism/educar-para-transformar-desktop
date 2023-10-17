@@ -3,8 +3,15 @@ import BoletinView from "../views/BoletinView.vue";
 
 const routes = [
   {
-    path: "/login",
+    path: "/",
     name: "login",
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem("x-token-ept")) {
+        next({ path: "/home", replace: true });
+      } else {
+        next();
+      }
+    },
     component: () =>
       import(/* webpackChunkName: "login" */ "../views/LoginView.vue"),
   },
@@ -15,7 +22,7 @@ const routes = [
       import(/* webpackChunkName: "mainLayout" */ "../layout/MainLayout.vue"),
     beforeEnter: (to, from, next) => {
       if (!localStorage.getItem("x-token-ept")) {
-        next({ path: "/home", replace: true });
+        next({ path: "/", replace: true });
       } else {
         next();
       }
@@ -163,9 +170,25 @@ const routes = [
       {
         path: "/",
         redirect: "home",
+        beforeEnter: (to, from, next) => {
+          const token = localStorage.getItem("x-token-ept");
+          if (!token) {
+            next({ path: "/login", replace: true });
+          } else {
+            next();
+          }
+        },
       },
       {
         path: "/:pathMatch(.*)*",
+        beforeEnter: (to, from, next) => {
+          const token = localStorage.getItem("x-token-ept");
+          if (!token) {
+            next({ path: "/login", replace: true });
+          } else {
+            next();
+          }
+        },
         redirect: "home",
       },
     ],
@@ -178,3 +201,4 @@ const router = createRouter({
 });
 
 export default router;
+1;

@@ -1,6 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
 import { RouterLink, useRouter } from "vue-router";
+const role = localStorage.getItem("user-role");
 const router = useRouter();
 
 const cerrarSesion = () => {
@@ -51,6 +52,7 @@ const cerrarSesion = () => {
             </li>
             <li class="nav-link">
               <RouterLink
+                class="link-router"
                 v-if="role === 'student' || role === 'parent'"
                 to="/boletin"
                 ><i class="bi bi-backpack2 icons"></i> Boletin</RouterLink
@@ -90,7 +92,7 @@ const cerrarSesion = () => {
                       role === 'authority' ||
                       role === 'professor'
                     "
-                    class="dropdown-item"
+                    class="dropdown-item link-router"
                     >Listado de Alumnos</RouterLink
                   >
                 </li>
@@ -149,7 +151,6 @@ const cerrarSesion = () => {
     color: white;
     transform: scale(1.05);
     transition: 0.2s;
-    // Holasg
   }
 }
 .vertical-nav {
