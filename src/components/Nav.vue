@@ -1,6 +1,12 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
-import { RouterLink } from "vue-router";
+import { RouterLink, useRouter } from "vue-router";
+const router = useRouter();
+
+const cerrarSesion = () => {
+  localStorage.clear();
+  router.push("/login");
+};
 </script>
 <template>
   <nav class="navbar bg-body-tertiary shadow-sm">
@@ -87,15 +93,22 @@ import { RouterLink } from "vue-router";
                 </li>
               </ul>
             </li>
+            <li>
+              <bottom @click="cerrarSesion" class="btn btn-danger"
+                >Cerrar sesión</bottom
+              >
+            </li>
           </ul>
           <div class="social-media">
             <a
               href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel"
               target="_blank"
-              ><i class="bi bi-github icons"></i
+              ><i class="bi bi-github icons link-router"></i
             ></a>
-            <a href="" target="_blank"><i class="bi bi-linkedin icons"></i></a>
-            <a href=""><i class="bi bi-whatsapp icons"></i></a>
+            <a href="" target="_blank"
+              ><i class="bi bi-linkedin icons link-router"></i
+            ></a>
+            <a href=""><i class="bi bi-whatsapp icons link-router"></i></a>
           </div>
         </div>
       </div>
@@ -156,6 +169,14 @@ import { RouterLink } from "vue-router";
 .dropdown-item {
   color: #333;
 }
+.btn {
+  margin-top: 15px;
+  height: 50px;
+  width: 150px;
+  text-align: center;
+  padding-top: 12px;
+}
+
 // .vertical-nav ul li:hover {
 //   background: #71ad80;
 // }

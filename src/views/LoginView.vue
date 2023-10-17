@@ -55,7 +55,7 @@ async function login(event) {
       <form @submit="login">
         <div class="username">
           <input type="text" required v-model="usuariosObject.id" />
-          <label>Nombre de usuario</label>
+          <label>Ingrese con su DNI</label>
         </div>
         <div class="username">
           <input type="password" required v-model="usuariosObject.password" />
