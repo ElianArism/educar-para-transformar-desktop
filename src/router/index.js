@@ -48,16 +48,8 @@ const routes = [
           ),
       },
       {
-        path: "/cuotas-impagas",
-        name: "cuotas-impagas",
-        component: () =>
-          import(
-            /* webpackChunkName: "CuotasImpagas" */ "../views/UnpaidFeesList.vue"
-          ),
-      },
-      {
-        path: "/notasAlumnos",
-        name: "notasAlumnos",
+        path: "/notasAlumnos/:alumnoId",
+        name: "notasAlumnos-alumno-id",
         component: () =>
           import(
             /* webpackChunkName: "notasAlumno" */ "../views/NotasAlumnoView.vue"

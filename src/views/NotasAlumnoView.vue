@@ -1,8 +1,25 @@
 <script setup>
-import { ref } from "vue";
+import { reactive, ref } from "vue";
 import { StudentService } from "../services/student.service";
+import { useRoute } from "vue-router";
 let alumnos = ref([]);
-
+const AlumnoId = useRoute().params.alumnoId;
+console.log(AlumnoId);
+let alumno = reactive({
+  name: "Diego",
+  lastName: "barrios",
+  dni: "123123",
+  nota1: "",
+  nota2: "",
+  nota3: "",
+  recu1: "",
+  recu2: "",
+  recu3: "",
+  notaF: "",
+});
+const notas = () => {
+  console.log(alumno);
+};
 const servicioStudent = new StudentService();
 
 const initStudentList = async () => {
@@ -22,22 +39,8 @@ initStudentList();
 <template>
   <section class="cuerpo">
     <div class="seleccion-cursos">
-      <h2>Buscador</h2>
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Buscar  Alumno"
-        @input="filterStudentsByDNI"
-      />
-
-      <h2>Notas</h2>
-      <p>Filtro por curso</p>
-      <select class="form-select" aria-label="Default select example">
-        <option selected>Elegir curso</option>
-        <option value="1">curso 1</option>
-        <option value="2">curso 2</option>
-        <option value="3">curso 3</option>
-      </select>
+      <h2>Cargar notas</h2>
+      <p>alumno {{ alumno.name }} {{ alumno.lastName }}</p>
     </div>
     <div class="container-table" id="app">
       <table>
@@ -57,25 +60,82 @@ initStudentList();
           </tr>
         </thead>
         <tbody>
-          <tr v-for="Alumno in alumnos" :key="Alumno">
+          <tr>
             <td>
-              {{ Alumno.id }}
+              {{ alumno.dni }}
             </td>
             <td>
-              {{ Alumno.name }}
+              {{ alumno.name }}
             </td>
             <td>
-              {{ Alumno.lastName }}
+              {{ alumno.lastName }}
             </td>
-            <td><input type="number" class="Notas" min="1" max="10" /></td>
-            <td><input type="number" class="Notas" min="1" max="10" /></td>
-            <td><input type="number" class="Notas" min="1" max="10" /></td>
-            <td><input type="number" class="Notas" min="1" max="10" /></td>
-            <td><input type="number" class="Notas" min="1" max="10" /></td>
-            <td><input type="number" class="Notas" min="1" max="10" /></td>
+            <td>
+              <input
+                type="number"
+                class="Notas"
+                min="1"
+                max="10"
+                v-model="alumno.nota1"
+              />
+            </td>
+            <td>
+              <input
+                type="number"
+                class="Notas"
+                min="1"
+                max="10"
+                v-model="alumno.nota2"
+              />
+            </td>
+            <td>
+              <input
+                type="number"
+                class="Notas"
+                min="1"
+                max="10"
+                v-model="alumno.nota3"
+              />
+            </td>
+            <td>
+              <input
+                type="number"
+                class="Notas"
+                min="1"
+                max="10"
+                v-model="alumno.recu1"
+              />
+            </td>
+            <td>
+              <input
+                type="number"
+                class="Notas"
+                min="1"
+                max="10"
+                v-model="alumno.recu2"
+              />
+            </td>
+            <td>
+              <input
+                @input="
+                  () => {
+                    if (value > 0 || value < 11) {
+                      value = 6;
+                    }
+                  }
+                "
+                type="number"
+                class="Notas"
+                min="1"
+                max="10"
+                v-model="alumno.recu3"
+              />
+            </td>
             <td>Promedio</td>
             <td>
-              <button type="Submit" class="btn btn-info">Cargar Notas</button>
+              <button type="submit" class="btn btn-info" @click="notas">
+                Cargar Notas
+              </button>
             </td>
           </tr>
         </tbody>

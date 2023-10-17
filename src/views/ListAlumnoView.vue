@@ -82,7 +82,7 @@ initStudentList();
                 {{ Alumno.studentInfo.role }}
               </td>
               <td>
-                <RouterLink to="/notasAlumnos"
+                <RouterLink to="/notasAlumnos/12"
                   ><button type="button" class="btn btn-info">
                     Agregar Nota
                   </button></RouterLink
