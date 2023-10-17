@@ -69,10 +69,20 @@ import { RouterLink } from "vue-router";
                     >Listado de Alumnos</RouterLink
                   >
                 </li>
-                <li><a class="dropdown-item" href="#">Profesores</a></li>
+                <li>
+                  <RouterLink to="/list-profesor" class="dropdown-item"
+                    >Profesores</RouterLink
+                  >
+                </li>
+
                 <li>
                   <RouterLink to="/cuotas-impagas" class="dropdown-item"
                     >Cuotas Impagas</RouterLink
+                  >
+                </li>
+                <li>
+                  <RouterLink to="/list-parents" class="dropdown-item"
+                    >Padres</RouterLink
                   >
                 </li>
               </ul>
@@ -98,7 +108,7 @@ a {
   color: black;
 
   &:hover {
-    color: aquamarine;
+    color: white;
     transform: scale(1.05);
     transition: 0.2s;
     // Holasg

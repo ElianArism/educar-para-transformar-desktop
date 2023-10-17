@@ -48,6 +48,22 @@ const routes = [
           ),
       },
       {
+        path: "/list-profesor",
+        name: "list-profesor",
+        component: () =>
+          import(
+            /* webpackChunkName: "ListProfesor" */ "../views/ListProfesoresView.vue"
+          ),
+      },
+      {
+        path: "/list-parents",
+        name: "list-parents",
+        component: () =>
+          import(
+            /* webpackChunkName: "ListProfesor" */ "../views/ListParentsView.vue"
+          ),
+      },
+      {
         path: "/cuotas-impagas",
         name: "cuotas-impagas",
         component: () =>
