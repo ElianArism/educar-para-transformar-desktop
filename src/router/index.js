@@ -48,8 +48,8 @@ const routes = [
           ),
       },
       {
-        path: "/notasAlumnos",
-        name: "notasAlumnos",
+        path: "/notasAlumnos/:alumnoId",
+        name: "notasAlumnos-alumno-id",
         component: () =>
           import(
             /* webpackChunkName: "notasAlumno" */ "../views/NotasAlumnoView.vue"

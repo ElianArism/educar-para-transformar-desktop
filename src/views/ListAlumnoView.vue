@@ -1,7 +1,9 @@
 <script setup>
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 import { StudentService } from "../services/student.service";
 let alumnos = ref([]);
+const router = useRouter();
 const servicioStudent = new StudentService();
 
 const initStudentList = async () => {
@@ -71,11 +73,13 @@ initStudentList();
               {{ Alumno.role }}
             </td>
             <td>
-              <RouterLink to="/notasAlumnos"
-                ><button type="button" class="btn btn-info">
-                  Agregar Nota
-                </button></RouterLink
+              <button
+                type="button"
+                class="btn btn-info"
+                @click="router.push('/notasAlumnos/' + Alumno.id)"
               >
+                Agregar Nota
+              </button>
             </td>
           </tr>
         </tbody>
