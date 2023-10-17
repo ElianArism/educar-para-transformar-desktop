@@ -25,7 +25,9 @@ const filterParentByName = (event) => {
   }
 
   padres.value = parentsBackup.value.filter((a) => {
-    return `${a.name} ${a.lastName}`.toLowerCase().includes(value);
+    return `${a.name} ${a.lastName}`
+      .toLowerCase()
+      .includes(value.toLowerCase());
   });
 };
 </script>

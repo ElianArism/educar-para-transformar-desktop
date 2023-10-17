@@ -1,5 +1,6 @@
 <script setup>
 import { ProfessorService } from "@/services/professor.service";
+import uniqBy from "lodash.uniqby";
 import { onMounted, ref } from "vue";
 
 const alumnos = ref([]);
@@ -32,8 +33,10 @@ const filterStudentsBySelectOption = (event) => {
   const filteredCourses = courses.value.filter(
     (course) => course.name === filter
   );
-
-  const students = filteredCourses.flatMap((c) => c.students);
+  const students = uniqBy(
+    filteredCourses.flatMap((c) => c.students),
+    "studentInfo.id"
+  );
   alumnos.value = students;
 };
 
@@ -48,7 +51,7 @@ const filterStudentByName = (event) => {
   alumnos.value = alumnosBckp.value.filter((a) => {
     return `${a.studentInfo.name} ${a.studentInfo.lastName}`
       .toLowerCase()
-      .includes(value);
+      .includes(value.toLowerCase());
   });
 };
 </script>

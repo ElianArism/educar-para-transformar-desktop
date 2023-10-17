@@ -34,14 +34,12 @@ const updateStudentGrades = async () => {
     (alumno.firstTrimester + alumno.secondTrimester + alumno.thirdTrimester) / 3
   );
 
-  const resp = await studentService.updateStudentGrades(alumnoId, courseId, {
+  await studentService.updateStudentGrades(alumnoId, courseId, {
     firstTrimester: alumno.firstTrimester,
     secondTrimester: alumno.secondTrimester,
     thirdTrimester: alumno.thirdTrimester,
     finalGrade: alumno.finalGrade,
   });
-
-  console.log(resp);
 
   Swal.fire({
     title: "Nota actualizada",
@@ -56,7 +54,6 @@ const updateStudentGrades = async () => {
 
 const getStudentInfo = async () => {
   const student = await studentService.getStudentById(alumnoId);
-  console.log(student);
   alumno.dni = student.studentInfo?.id;
   alumno.name = student.studentInfo?.name;
   alumno.lastName = student.studentInfo?.lastName;

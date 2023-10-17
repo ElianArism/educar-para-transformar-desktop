@@ -1,5 +1,5 @@
+import uniqBy from "lodash.uniqby";
 import { BaseService } from "./base.service";
-
 export class ProfessorService extends BaseService {
   constructor() {
     super();
@@ -41,7 +41,10 @@ export class ProfessorService extends BaseService {
         });
         return course;
       });
-      const students = studentsWCourse.flatMap((course) => course.students);
+      const students = uniqBy(
+        studentsWCourse.flatMap((course) => course.students),
+        "studentInfo.id"
+      );
       return students;
     } catch (error) {
       console.log(error);

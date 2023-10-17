@@ -1,4 +1,5 @@
 import { CoursesService } from "@/services/courses.service";
+import uniqBy from "lodash.uniqby";
 import { onMounted, ref } from "vue";
 
 export const useStudentFees = () => {
@@ -25,7 +26,11 @@ export const useStudentFees = () => {
       c.students = c.students.map((s) => s.studentInfo);
       return c;
     });
-    const studentsByCourse = mappedCourses.flatMap((course) => course.students);
+
+    const studentsByCourse = uniqBy(
+      mappedCourses.flatMap((course) => course.students),
+      "id"
+    );
 
     students.value = studentsByCourse;
     studentsBackup.value = students.value;

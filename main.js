@@ -18,8 +18,6 @@ function createWindow() {
 
   win.loadFile("dist/index.html");
 
-  win.openDevTools();
-
   win.on("closed", () => {
     win = null;
   });

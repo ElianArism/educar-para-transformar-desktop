@@ -1,5 +1,5 @@
+import uniqBy from "lodash.uniqby";
 import { BaseService } from "./base.service";
-
 export class StudentService extends BaseService {
   constructor() {
     super();
@@ -9,7 +9,11 @@ export class StudentService extends BaseService {
     try {
       const response = await fetch(`${this._url}/courses`);
       const { data } = await response.json();
-      return data.courses.flatMap((course) => course.students);
+
+      return uniqBy(
+        data.courses.flatMap((course) => course.students),
+        "studentInfo.id"
+      );
     } catch (error) {
       console.log(error);
     }

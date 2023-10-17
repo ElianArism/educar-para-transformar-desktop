@@ -23,7 +23,9 @@ const filterProfesorByName = (event) => {
   }
 
   profesores.value = profesoresBackup.value.filter((a) => {
-    return `${a.name} ${a.lastName}`.toLowerCase().includes(value);
+    return `${a.name} ${a.lastName}`
+      .toLowerCase()
+      .includes(value.toLowerCase());
   });
 };
 </script>

@@ -1,5 +1,6 @@
 <script setup>
 import { useStudentFees } from "@/hooks/useStudentFees";
+import uniqBy from "lodash.uniqby";
 import { countUnpaidFees } from "../utils/count-unpaid-fees";
 
 const {
@@ -21,14 +22,20 @@ const filterCoursesByYear = (event) => {
   }
 
   courses.value = courses.value.filter((course) => year === course.year);
-  students.value = courses.value.flatMap((course) => course.students);
+  students.value = uniqBy(
+    courses.value.flatMap((course) => course.students),
+    "id"
+  );
 };
 
 const filterStudentsByCourse = (event) => {
   const filter = event.target.value;
 
   if (filter == -1) {
-    students.value = courses.value.flatMap((course) => course.students);
+    students.value = uniqBy(
+      courses.value.flatMap((course) => course.students),
+      "id"
+    );
     return;
   }
 
