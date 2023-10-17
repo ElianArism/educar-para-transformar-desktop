@@ -1,6 +1,7 @@
 <script setup>
 import { ProfessorService } from "@/services/professor.service";
 import { ref } from "vue";
+
 const alumnos = ref([]);
 const courses = ref([]);
 const professorId = localStorage.getItem("user-id");
@@ -9,6 +10,8 @@ const professorService = new ProfessorService();
 const initStudentList = async () => {
   courses.value = await professorService.getCoursesByProfessorId(professorId);
   alumnos.value = await professorService.getStudentsByProfessorId(professorId);
+
+  console.log(courses.value, alumnos.value);
 };
 initStudentList();
 </script>
