@@ -11,7 +11,7 @@ const initProfesores = async () => {
 initProfesores();
 </script>
 <template>
-  <h2>Listado de Profesores de re verga</h2>
+  <h2>Listado de Profesores</h2>
   <table class="table">
     <thead>
       <tr>
@@ -31,3 +31,9 @@ initProfesores();
     </tbody>
   </table>
 </template>
+
+<style scoped>
+h2 {
+  margin: 10px;
+}
+</style>

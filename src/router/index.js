@@ -32,6 +32,12 @@ const routes = [
           import(/* webpackChunkName: "payFee" */ "../views/PayFeeView.vue"),
       },
       {
+        path: "/perfil-user",
+        name: "perfil-user",
+        component: () =>
+          import(/* webpackChunkName: "PerfilUse" */ "../views/PerfilView.vue"),
+      },
+      {
         path: "/pay-fee/:studentId",
         name: "pay-fee-student-id",
         component: () =>
