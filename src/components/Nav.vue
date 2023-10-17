@@ -2,7 +2,7 @@
 <script setup>
 import { RouterLink, useRouter } from "vue-router";
 const router = useRouter();
-
+const role = localStorage.getItem("user-role");
 const cerrarSesion = () => {
   localStorage.clear();
   router.push("/login");

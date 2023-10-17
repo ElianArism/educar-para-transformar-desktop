@@ -9,8 +9,8 @@ const courseService = new CoursesService();
 const studentNotas = ref({});
 
 const studentData = {
-  firstName: "Alisha",
-  lastName: "Lehmann",
+  firstName: "",
+  lastName: "",
   cicloLectivo: "2023",
 };
 
