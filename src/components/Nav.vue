@@ -5,7 +5,9 @@ const role = localStorage.getItem("user-role");
 const router = useRouter();
 const cerrarSesion = () => {
   localStorage.clear();
-  router.push("/login");
+  router.push({
+    name: "login",
+  });
 };
 </script>
 <template>
