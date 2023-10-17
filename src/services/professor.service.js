@@ -35,7 +35,13 @@ export class ProfessorService extends BaseService {
       const filteredCourses = data.courses.filter(
         (course) => course.professor.id === professorId
       );
-      const students = filteredCourses.flatMap((course) => course.students);
+      const studentsWCourse = filteredCourses.map((course) => {
+        course.students.forEach((s) => {
+          s.courseId = course._id;
+        });
+        return course;
+      });
+      const students = studentsWCourse.flatMap((course) => course.students);
       return students;
     } catch (error) {
       console.log(error);

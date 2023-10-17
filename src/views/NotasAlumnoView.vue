@@ -1,11 +1,11 @@
 <script setup>
 import { reactive, ref } from "vue";
-import { StudentService } from "../services/student.service";
 import { useRoute } from "vue-router";
-let alumnos = ref([]);
-const AlumnoId = useRoute().params.alumnoId;
-console.log(AlumnoId);
-let alumno = reactive({
+import { StudentService } from "../services/student.service";
+const alumnos = ref([]);
+const { courseId, alumnoId } = useRoute().params;
+console.log(alumnoId, courseId);
+const alumno = reactive({
   name: "Diego",
   lastName: "barrios",
   dni: "123123",
@@ -27,14 +27,6 @@ const initStudentList = async () => {
   alumnos.value = data;
 };
 initStudentList();
-
-// async function CargarNotasAlumno (event){
-//     event.preventDefault();{
-//         fetch(""){
-//             method: "POST"
-//         }
-//     }
-// }
 </script>
 <template>
   <section class="cuerpo">

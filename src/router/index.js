@@ -56,7 +56,7 @@ const routes = [
           ),
       },
       {
-        path: "/notasAlumnos/:alumnoId",
+        path: "/notasAlumnos/:courseId/:alumnoId",
         name: "notasAlumnos-alumno-id",
         component: () =>
           import(
