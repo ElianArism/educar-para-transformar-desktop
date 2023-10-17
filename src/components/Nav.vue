@@ -34,12 +34,12 @@ import { RouterLink } from "vue-router";
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-link">
-              <RouterLink to=""
+              <RouterLink to="/home" class="link-router"
                 ><i class="bi bi-house-fill icons"></i> Home</RouterLink
               >
             </li>
             <li class="nav-link">
-              <RouterLink to=""
+              <RouterLink to="/perfil-user" class="link-router"
                 ><i class="bi bi-person icons"></i> Perfil</RouterLink
               >
             </li>
@@ -49,13 +49,13 @@ import { RouterLink } from "vue-router";
               >
             </li>
             <li class="nav-link">
-              <RouterLink to="/pay-fee"
+              <RouterLink to="/pay-fee" class="link-router"
                 ><i class="bi bi-bank icons"></i> Pagos</RouterLink
               >
             </li>
             <li class="nav-link">
               <a
-                class="dropdown-toggle"
+                class="dropdown-toggle link-router"
                 href="#"
                 role="button"
                 data-bs-toggle="dropdown"
@@ -103,9 +103,9 @@ import { RouterLink } from "vue-router";
   </nav>
 </template>
 <style lang="scss" scoped>
-a {
+.link-router {
   text-decoration: none;
-  color: black;
+  color: #dbdada;
 
   &:hover {
     color: white;
@@ -153,7 +153,9 @@ a {
   width: 40px;
   height: 40px;
 }
-
+.dropdown-item {
+  color: #333;
+}
 // .vertical-nav ul li:hover {
 //   background: #71ad80;
 // }
