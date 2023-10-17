@@ -34,7 +34,7 @@ import { RouterLink } from "vue-router";
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-link">
-              <RouterLink to="" class="link-router"
+              <RouterLink to="/home" class="link-router"
                 ><i class="bi bi-house-fill icons"></i> Home</RouterLink
               >
             </li>

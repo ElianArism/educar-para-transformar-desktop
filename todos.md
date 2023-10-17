@@ -10,6 +10,7 @@ Listados con descarga de PDF
 - Listado de profesores => completo
 
 Features:
+
 Alerta de cuota impaga
 Guards para que no cualquiera pueda acceder a cualquier cosa
 Padres ver boletin de hijos
