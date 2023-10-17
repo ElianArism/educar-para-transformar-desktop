@@ -53,9 +53,9 @@ import { RouterLink } from "vue-router";
                 ><i class="bi bi-bank icons"></i> Pagos</RouterLink
               >
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-link">
               <a
-                class="nav-link dropdown-toggle"
+                class="dropdown-toggle"
                 href="#"
                 role="button"
                 data-bs-toggle="dropdown"
@@ -64,10 +64,26 @@ import { RouterLink } from "vue-router";
                 <i class="bi bi-book icons"></i> Listas
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Alumnos</a></li>
-                <li><a class="dropdown-item" href="#">Profesores</a></li>
                 <li>
-                  <a class="dropdown-item" href="#">otra cosa</a>
+                  <RouterLink to="/list-alumno" class="dropdown-item"
+                    >Listado de Alumnos</RouterLink
+                  >
+                </li>
+                <li>
+                  <RouterLink to="/list-profesor" class="dropdown-item"
+                    >Profesores</RouterLink
+                  >
+                </li>
+
+                <li>
+                  <RouterLink to="/cuotas-impagas" class="dropdown-item"
+                    >Cuotas Impagas</RouterLink
+                  >
+                </li>
+                <li>
+                  <RouterLink to="/list-parents" class="dropdown-item"
+                    >Padres</RouterLink
+                  >
                 </li>
               </ul>
             </li>
@@ -92,7 +108,7 @@ a {
   color: black;
 
   &:hover {
-    color: aquamarine;
+    color: white;
     transform: scale(1.05);
     transition: 0.2s;
     // Holasg

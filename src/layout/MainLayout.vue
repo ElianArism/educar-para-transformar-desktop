@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid p-0">
     <Nav />
-    <div class="row">
+    <div class="row w-100">
       <div class="col">
         <router-view />
       </div>
@@ -15,7 +15,7 @@ import Nav from "../components/Nav.vue";
 
 <style lang="scss" scoped>
 .container-fluid {
-  min-height: 100%;
+  min-height: 100vh;
   width: 100%;
 }
 

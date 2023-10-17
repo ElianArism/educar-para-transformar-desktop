@@ -46,6 +46,46 @@ const routes = [
           ),
       },
       {
+        path: "/list-alumno",
+        name: "list-alumno",
+        component: () =>
+          import(
+            /* webpackChunkName: "ListAlumno" */ "../views/ListAlumnoView.vue"
+          ),
+      },
+      {
+        path: "/list-profesor",
+        name: "list-profesor",
+        component: () =>
+          import(
+            /* webpackChunkName: "ListProfesor" */ "../views/ListProfesoresView.vue"
+          ),
+      },
+      {
+        path: "/list-parents",
+        name: "list-parents",
+        component: () =>
+          import(
+            /* webpackChunkName: "ListProfesor" */ "../views/ListParentsView.vue"
+          ),
+      },
+      {
+        path: "/cuotas-impagas",
+        name: "cuotas-impagas",
+        component: () =>
+          import(
+            /* webpackChunkName: "cuotasImpagas" */ "../views/UnpaidFeesList.vue"
+          ),
+      },
+      {
+        path: "/notasAlumnos/:courseId/:alumnoId",
+        name: "notasAlumnos-alumno-id",
+        component: () =>
+          import(
+            /* webpackChunkName: "notasAlumno" */ "../views/NotasAlumnoView.vue"
+          ),
+      },
+      {
         path: "/",
         redirect: "home",
       },

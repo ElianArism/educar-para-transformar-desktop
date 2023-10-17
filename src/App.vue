@@ -10,6 +10,12 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+body,
+#app,
+html {
+  background: linear-gradient(#ffff, rgb(155, 154, 154)) no-repeat;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

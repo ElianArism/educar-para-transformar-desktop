@@ -1,46 +1,12 @@
 <script setup>
-import { format } from "date-fns";
+import { addDays, format } from "date-fns";
 import { es } from "date-fns/locale";
-import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
-import { CoursesService } from "../services/courses.service";
-import { StudentService } from "../services/student.service";
+import { useStudentFees } from "../hooks/useStudentFees";
 
 const router = useRouter();
-const coursesService = new CoursesService();
-const studentsService = new StudentService();
-
-const courses = ref([]);
-const students = ref([]);
-const studentsBackup = ref([]);
-
-const getCourses = async () => {
-  const { data } = await coursesService.getCourses();
-  courses.value = data.courses;
-};
-
-const initStudentList = async () => {
-  const { data } = await studentsService.getStudents();
-  students.value = data;
-  studentsBackup.value = data;
-};
-
-onMounted(() => {
-  initStudentList();
-  getCourses();
-});
-
-const filterStudentsBySelectOption = (event) => {
-  const filter = event.target.value;
-
-  if (filter === "todos") {
-    students.value = studentsBackup.value;
-    return;
-  }
-
-  const [course] = courses.value.filter(({ name }) => filter === name);
-  students.value = course.students;
-};
+const { students, courses, filterStudentsBySelectOption, studentsBackup } =
+  useStudentFees();
 
 const filterStudentsByDNI = (event) => {
   const dni = event.target.value?.trim();
@@ -50,7 +16,6 @@ const filterStudentsByDNI = (event) => {
   const filteredStudents = studentsBackup.value.filter((student) =>
     student.id.includes(dni)
   );
-
   students.value = filteredStudents;
 };
 </script>
@@ -60,7 +25,7 @@ const filterStudentsByDNI = (event) => {
     <div class="row">
       <div class="col">
         <div
-          class="mb-5 d-flex flex-column align-items-center justify-content-center p-1"
+          class="my-3 d-flex flex-column align-items-center justify-content-center p-1"
         >
           <h5 class="m-0">Pagar cuota</h5>
           <hr class="m-0 w-25" />
@@ -123,7 +88,10 @@ const filterStudentsByDNI = (event) => {
                 class="d-flex justify-content-between w-100"
                 style="padding-right: 10px"
               >
-                <span> {{ student.name }} {{ student.lastName }} </span>
+                <span>
+                  {{ student.name }}
+                  {{ student.lastName }}
+                </span>
                 <span> DNI: {{ student.id }} </span>
               </span>
             </button>
@@ -134,7 +102,7 @@ const filterStudentsByDNI = (event) => {
             aria-labelledby="heading1"
             class="accordion-collapse collapse"
           >
-            <div class="accordion-body">
+            <ul class="accordion-body">
               <div class="w-100 d-flex">
                 <button
                   class="btn w-75 m-auto mb-3 btn-info"
@@ -155,7 +123,7 @@ const filterStudentsByDNI = (event) => {
                   <span>
                     {{
                       format(
-                        new Date(fee.paymentDate),
+                        addDays(new Date(fee.paymentDate), 1),
                         "'Cuota pagada el dia' dd 'de' LLLL 'del' yyyy",
                         {
                           locale: es,
@@ -164,8 +132,27 @@ const filterStudentsByDNI = (event) => {
                     }}
                   </span>
                 </div>
+                <ul class="list-group">
+                  <div
+                    class="list-group-item list-group-item-info d-flex align-items-center"
+                  >
+                    <span class="badge bg-success"> Pagado </span>
+                    &nbsp;
+                    <span>
+                      {{
+                        format(
+                          new Date(),
+                          "'Cuota pagada el dia' eeee mm 'de' LLLL 'del' yyyy",
+                          {
+                            locale: es,
+                          }
+                        )
+                      }}
+                    </span>
+                  </div>
+                </ul>
               </ul>
-            </div>
+            </ul>
           </div>
         </div>
       </div>
