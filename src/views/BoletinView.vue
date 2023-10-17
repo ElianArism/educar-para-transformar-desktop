@@ -1,7 +1,7 @@
 <script setup>
 /* eslint-disable */
-import { ref, onMounted } from "vue";
 import { CoursesService } from "@/services/courses.service"; //API
+import { onMounted, ref } from "vue";
 
 const courses = ref([]);
 const courseService = new CoursesService();

@@ -8,13 +8,13 @@ Listados con descarga de PDF
 
 - Listado de padres => completo
 - Listado de profesores => completo
+- Guards para que no cualquiera pueda acceder a cualquier cosa
+- Alerta de cuota impaga
+- Cargar notas con listado de alumnos (profesor) // WIP
 
 Features:
 
-Alerta de cuota impaga
-Guards para que no cualquiera pueda acceder a cualquier cosa
 Padres ver boletin de hijos
-Cargar notas con listado de alumnos (profesor) // WIP
 
 Deseables
 

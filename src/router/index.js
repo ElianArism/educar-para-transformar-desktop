@@ -32,7 +32,7 @@ const routes = [
         name: "Boletin",
         beforeEnter: (to, from, next) => {
           const role = localStorage.getItem("user-role");
-          if (role !== "student" || role !== "parent") {
+          if (role !== "student" && role !== "parent") {
             next({ path: "/home", replace: true });
           } else {
             next();
@@ -45,7 +45,7 @@ const routes = [
         name: "pay-fee",
         beforeEnter: (to, from, next) => {
           const role = localStorage.getItem("user-role");
-          if (role !== "personal" || role !== "authority") {
+          if (role !== "personal" && role !== "authority") {
             next({ path: "/home", replace: true });
           } else {
             next();
@@ -64,7 +64,7 @@ const routes = [
         path: "/pay-fee/:studentId",
         beforeEnter: (to, from, next) => {
           const role = localStorage.getItem("user-role");
-          if (role !== "personal" || role !== "authority") {
+          if (role !== "personal" && role !== "authority") {
             next({ path: "/home", replace: true });
           } else {
             next();
@@ -82,8 +82,8 @@ const routes = [
         beforeEnter: (to, from, next) => {
           const role = localStorage.getItem("user-role");
           if (
-            role !== "personal" ||
-            role !== "authority" ||
+            role !== "personal" &&
+            role !== "authority" &&
             role !== "professor"
           ) {
             next({ path: "/home", replace: true });
@@ -101,7 +101,7 @@ const routes = [
         name: "list-profesor",
         beforeEnter: (to, from, next) => {
           const role = localStorage.getItem("user-role");
-          if (role !== "personal" || role !== "authority") {
+          if (role !== "personal" && role !== "authority") {
             next({ path: "/home", replace: true });
           } else {
             next();
@@ -117,7 +117,7 @@ const routes = [
         name: "list-parents",
         beforeEnter: (to, from, next) => {
           const role = localStorage.getItem("user-role");
-          if (role !== "personal" || role !== "authority") {
+          if (role !== "personal" && role !== "authority") {
             next({ path: "/home", replace: true });
           } else {
             next();
@@ -132,7 +132,7 @@ const routes = [
         path: "/cuotas-impagas",
         beforeEnter: (to, from, next) => {
           const role = localStorage.getItem("user-role");
-          if (role !== "personal" || role !== "authority") {
+          if (role !== "personal" && role !== "authority") {
             next({ path: "/home", replace: true });
           } else {
             next();
@@ -149,7 +149,7 @@ const routes = [
         name: "notasAlumnos-alumno-id",
         beforeEnter: (to, from, next) => {
           const role = localStorage.getItem("user-role");
-          if (role !== "professor" || role !== "authority") {
+          if (role !== "professor" && role !== "authority") {
             next({ path: "/home", replace: true });
           } else {
             next();
