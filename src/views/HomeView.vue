@@ -15,7 +15,7 @@ onMounted(async () => {
 
 const alertUnpaidFees = (student) => {
   const unpaid = countUnpaidFees(student);
-  if (unpaid > -1) {
+  if (unpaid > 0) {
     Swal.fire(
       "Cuota impaga",
       `Tiene un total de  ${unpaid} couta/s impaga/s\nPor favor acerquese al centro educativo para abonarlas`,

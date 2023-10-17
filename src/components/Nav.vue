@@ -1,6 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
 import { RouterLink } from "vue-router";
+const role = localStorage.getItem("user-role");
 </script>
 <template>
   <nav class="navbar bg-body-tertiary shadow-sm">
@@ -44,16 +45,28 @@ import { RouterLink } from "vue-router";
               >
             </li>
             <li class="nav-link">
-              <RouterLink to="/boletin"
+              <RouterLink
+                v-if="role === 'student' || role === 'parent'"
+                to="/boletin"
                 ><i class="bi bi-backpack2 icons"></i> Boletin</RouterLink
               >
             </li>
             <li class="nav-link">
-              <RouterLink to="/pay-fee" class="link-router"
+              <RouterLink
+                to="/pay-fee"
+                class="link-router"
+                v-if="role === 'personal' || role === 'authority'"
                 ><i class="bi bi-bank icons"></i> Pagos</RouterLink
               >
             </li>
-            <li class="nav-link">
+            <li
+              class="nav-link"
+              v-if="
+                role === 'personal' ||
+                role === 'authority' ||
+                role === 'professor'
+              "
+            >
               <a
                 class="dropdown-toggle link-router"
                 href="#"
@@ -65,23 +78,36 @@ import { RouterLink } from "vue-router";
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <RouterLink to="/list-alumno" class="dropdown-item"
+                  <RouterLink
+                    to="/list-alumno"
+                    v-if="
+                      role === 'personal' ||
+                      role === 'authority' ||
+                      role === 'professor'
+                    "
+                    class="dropdown-item"
                     >Listado de Alumnos</RouterLink
                   >
                 </li>
                 <li>
-                  <RouterLink to="/list-profesor" class="dropdown-item"
+                  <RouterLink
+                    to="/list-profesor"
+                    v-if="role === 'personal' || role === 'authority'"
+                    class="dropdown-item"
                     >Profesores</RouterLink
                   >
                 </li>
 
-                <li>
+                <li v-if="role === 'personal' || role === 'authority'">
                   <RouterLink to="/cuotas-impagas" class="dropdown-item"
                     >Cuotas Impagas</RouterLink
                   >
                 </li>
                 <li>
-                  <RouterLink to="/list-parents" class="dropdown-item"
+                  <RouterLink
+                    to="/list-parents"
+                    v-if="role === 'personal' || role === 'authority'"
+                    class="dropdown-item"
                     >Padres</RouterLink
                   >
                 </li>

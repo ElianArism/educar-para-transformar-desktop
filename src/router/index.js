@@ -13,6 +13,13 @@ const routes = [
     name: "main-layout",
     component: () =>
       import(/* webpackChunkName: "mainLayout" */ "../layout/MainLayout.vue"),
+    beforeEnter: (to, from, next) => {
+      if (!localStorage.getItem("x-token-ept")) {
+        next({ path: "/home", replace: true });
+      } else {
+        next();
+      }
+    },
     children: [
       {
         path: "/home",
@@ -21,19 +28,29 @@ const routes = [
           import(/* webpackChunkName: "home" */ "../views/HomeView.vue"),
       },
       {
-        path: "/about",
-        name: "about",
-        component: () =>
-          import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
-      },
-      {
         path: "/boletin",
         name: "Boletin",
+        beforeEnter: (to, from, next) => {
+          const role = localStorage.getItem("user-role");
+          if (role !== "student" || role !== "parent") {
+            next({ path: "/home", replace: true });
+          } else {
+            next();
+          }
+        },
         component: BoletinView,
       },
       {
         path: "/pay-fee",
         name: "pay-fee",
+        beforeEnter: (to, from, next) => {
+          const role = localStorage.getItem("user-role");
+          if (role !== "personal" || role !== "authority") {
+            next({ path: "/home", replace: true });
+          } else {
+            next();
+          }
+        },
         component: () =>
           import(/* webpackChunkName: "payFee" */ "../views/PayFeeView.vue"),
       },
@@ -45,6 +62,14 @@ const routes = [
       },
       {
         path: "/pay-fee/:studentId",
+        beforeEnter: (to, from, next) => {
+          const role = localStorage.getItem("user-role");
+          if (role !== "personal" || role !== "authority") {
+            next({ path: "/home", replace: true });
+          } else {
+            next();
+          }
+        },
         name: "pay-fee-student-id",
         component: () =>
           import(
@@ -54,6 +79,18 @@ const routes = [
       {
         path: "/list-alumno",
         name: "list-alumno",
+        beforeEnter: (to, from, next) => {
+          const role = localStorage.getItem("user-role");
+          if (
+            role !== "personal" ||
+            role !== "authority" ||
+            role !== "professor"
+          ) {
+            next({ path: "/home", replace: true });
+          } else {
+            next();
+          }
+        },
         component: () =>
           import(
             /* webpackChunkName: "ListAlumno" */ "../views/ListAlumnoView.vue"
@@ -62,6 +99,14 @@ const routes = [
       {
         path: "/list-profesor",
         name: "list-profesor",
+        beforeEnter: (to, from, next) => {
+          const role = localStorage.getItem("user-role");
+          if (role !== "personal" || role !== "authority") {
+            next({ path: "/home", replace: true });
+          } else {
+            next();
+          }
+        },
         component: () =>
           import(
             /* webpackChunkName: "ListProfesor" */ "../views/ListProfesoresView.vue"
@@ -70,6 +115,14 @@ const routes = [
       {
         path: "/list-parents",
         name: "list-parents",
+        beforeEnter: (to, from, next) => {
+          const role = localStorage.getItem("user-role");
+          if (role !== "personal" || role !== "authority") {
+            next({ path: "/home", replace: true });
+          } else {
+            next();
+          }
+        },
         component: () =>
           import(
             /* webpackChunkName: "ListProfesor" */ "../views/ListParentsView.vue"
@@ -77,6 +130,14 @@ const routes = [
       },
       {
         path: "/cuotas-impagas",
+        beforeEnter: (to, from, next) => {
+          const role = localStorage.getItem("user-role");
+          if (role !== "personal" || role !== "authority") {
+            next({ path: "/home", replace: true });
+          } else {
+            next();
+          }
+        },
         name: "cuotas-impagas",
         component: () =>
           import(
@@ -86,6 +147,14 @@ const routes = [
       {
         path: "/notasAlumnos/:courseId/:alumnoId",
         name: "notasAlumnos-alumno-id",
+        beforeEnter: (to, from, next) => {
+          const role = localStorage.getItem("user-role");
+          if (role !== "professor" || role !== "authority") {
+            next({ path: "/home", replace: true });
+          } else {
+            next();
+          }
+        },
         component: () =>
           import(
             /* webpackChunkName: "notasAlumno" */ "../views/NotasAlumnoView.vue"
