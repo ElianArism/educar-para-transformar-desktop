@@ -1,68 +1,94 @@
 <script setup>
 /* eslint-disable */
-import { ref, computed } from "vue";
+import { ref, onMounted } from "vue";
+import { CoursesService } from "@/services/courses.service"; //API
 
-const materias = ["Materia1","Materia2","Materia3","Materia4","Materia5","Materia6","Materia7","Materia8","Materia9"]
+const courses = ref([]);
+const courseService = new CoursesService();
 
-const getRandomNota = () => {
-  // Genera un número aleatorio entre 1 y 10
-  const randomNota = Math.floor(Math.random() * 10) + 1;
+const studentNotas = ref({});
 
-  // Aumenta la probabilidad de notas mayores a 5
-  if (randomNota <= 5) {
-    return randomNota + 5; // Las notas menores a 5 se aumentan en 5
-  } else {
-    return randomNota;
-  }
-}
+const studentData = {
+  firstName: "Alisha",
+  lastName: "Lehmann",
+  cicloLectivo: "2023",
+};
 
+onMounted(async () => {
+  courses.value = (await courseService.getCourses()).data.courses;
 
-const notas = ref([...Array(materias.length)].map(() => getRandomNota()))
+  const user_id = localStorage.getItem("user-id");
 
-const calcularPromedioMateria = (index) => {
-  const notasMateria = notas.value.slice(index, index + 3); // Notas para el trimestre 1, 2 y 3 de la materia
-  return (notasMateria.reduce((acc, nota) => acc + nota, 0) / notasMateria.length).toFixed(2);
-}
+  const students = courses.value.flatMap((course) => course.students);
 
-const imprimirBoletin = () => {
-  
-}
+  studentNotas.value = students.find((s) => s.studentInfo.id === user_id);
+});
+
+const imprimirBoletin = () => {};
 </script>
 
 <template>
   <div>
-      <div class="header">
-        <!-- Logo, Nombre, Apellido, Curso, Ciclo Lectivo -->
+    <div class="header">
+      <img class="logo" src="../assets/logo.jpg" alt="Logo" />
+      <div>
+        <p class="student-data">
+          {{ studentData.firstName }} {{ studentData.lastName }}, Ciclo Lectivo:
+          {{ studentData.cicloLectivo }}
+        </p>
       </div>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Trimestre/Materia</th>
-            <th v-for="materia in materias">{{ materia }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>N 1</td>
-            <td v-for="materia in materias">{{ getRandomNota() }}</td>
-          </tr>
-          <tr>
-            <td>N 2</td>
-            <td v-for="materia in materias">{{ getRandomNota() }}</td>
-          </tr>
-          <tr>
-            <td>N 3</td>
-            <td v-for="materia in materias">{{ getRandomNota() }}</td>
-          </tr>
-          <tr>
-            <td>Promedio</td>
-            <td v-for="(materia, index) in materias">{{ calcularPromedioMateria(index) }}</td>
-          </tr>
-        </tbody>
-      </table>
-      <button @click="imprimirBoletin">Imprimir</button>
     </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Trimestre/Materia</th>
+          <th v-for="materia in courses">{{ materia.name }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>N 1</td>
+          <td>
+            {{ studentNotas.value?.schoolGrades.firstTrimester }}
+          </td>
+        </tr>
+        <tr>
+          <td>N 2</td>
+          <td>
+            {{ studentNotas.value?.schoolGrades.secondTrimester }}
+          </td>
+        </tr>
+        <tr>
+          <td>N 3</td>
+          <td>
+            {{ studentNotas.value?.schoolGrades.thirdTrimester }}
+          </td>
+        </tr>
+        <tr>
+          <td>Promedio</td>
+          <td>
+            {{ studentNotas.value?.schoolGrades.finalGrade }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button @click="imprimirBoletin">Imprimir</button>
+  </div>
 </template>
 
 <style scoped="scss">
+.header {
+  display: flex;
+  align-items: center;
+}
+.student-data {
+  font-weight: bold;
+  color: black;
+  align-items: center;
+}
+
+.logo {
+  margin-right: 50px;
+  width: 90px;
+}
 </style>

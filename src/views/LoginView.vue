@@ -33,6 +33,7 @@ async function login(event) {
 
     localStorage.setItem("x-token-ept", response.data);
     localStorage.setItem("user-id", usuariosObject.id);
+    localStorage.setItem("user-role", usuariosObject.role);
     router.push({ path: "home" });
   } catch (error) {
     Swal.fire(

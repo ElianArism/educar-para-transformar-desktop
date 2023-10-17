@@ -1,16 +1,18 @@
 <script setup>
-import { reactive } from "vue";
-let padres = reactive([
-  {
-    id: "123",
-    name: "Diego",
-    lastName: "barrios",
-    birthDate: "123123",
-  },
-]);
+import { UserService } from "@/services/user.service";
+import { ref } from "vue";
+const servicioParents = new UserService();
+const padres = ref([]);
+const initParents = async () => {
+  const parentsServicio = await servicioParents.getParents();
+  padres.value = parentsServicio;
+  console.log(parentsServicio);
+};
+initParents();
 </script>
 
 <template>
+  <h2>Listado de padres</h2>
   <table class="table">
     <thead>
       <tr>
@@ -30,3 +32,9 @@ let padres = reactive([
     </tbody>
   </table>
 </template>
+
+<style scoped>
+h2 {
+  margin: 10px;
+}
+</style>
