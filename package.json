@@ -7,7 +7,24 @@
     "electron:start": "electron .",
     "start": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "executable-electron": "electron-packager . --platform=win32 --archx64"
+  },
+  "build": {
+    "appId": "com.educarparatransformar.desktopapp",
+    "productName": "Educar para transformar - Desktop",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "linux": {
+      "target": "deb"
+    }
   },
   "dependencies": {
     "bootstrap": "^5.3.2",
@@ -30,6 +47,8 @@
     "@vue/cli-plugin-vuex": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
     "electron": "^26.2.4",
+    "electron-builder": "^24.6.4",
+    "electron-packager": "^17.1.2",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
