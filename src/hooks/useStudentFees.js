@@ -3,7 +3,7 @@ import { onMounted, ref } from "vue";
 
 export const useStudentFees = () => {
   const coursesService = new CoursesService();
-
+  const yearsAvailable = ref(["1", "2", "3", "4", "5"]);
   const courses = ref([]);
   const coursesBackup = ref([]);
   const students = ref([]);
@@ -56,7 +56,7 @@ export const useStudentFees = () => {
   return {
     filterStudentsBySelectOption,
     filterStudentsByCourseName,
-
+    yearsAvailable,
     courses,
     coursesBackup,
     students,

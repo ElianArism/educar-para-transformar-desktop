@@ -7,6 +7,7 @@ const {
   studentsBackup,
   courses,
   coursesBackup,
+  yearsAvailable,
   filterStudentsByCourseName,
 } = useStudentFees();
 
@@ -48,11 +49,11 @@ const filterStudentsByCourse = (event) => {
           >
             <option :value="-1">Todos</option>
             <option
-              :value="course.year"
+              :value="year"
               :key="index"
-              v-for="(course, index) of coursesBackup"
+              v-for="(year, index) of yearsAvailable"
             >
-              {{ course.year }}
+              {{ year }}
             </option>
           </select>
         </div>
