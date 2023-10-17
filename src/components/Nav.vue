@@ -44,7 +44,7 @@ import { RouterLink } from "vue-router";
               >
             </li>
             <li class="nav-link">
-              <RouterLink to="" class="link-router"
+              <RouterLink to="/boletin"
                 ><i class="bi bi-backpack2 icons"></i> Boletin</RouterLink
               >
             </li>
