@@ -2,7 +2,7 @@
 import { UserService } from "@/services/user.service";
 import { countUnpaidFees } from "@/utils/count-unpaid-fees";
 import Swal from "sweetalert2";
-import { ref, onMounted } from "vue";
+import { onMounted, ref } from "vue";
 
 const userService = new UserService();
 const role = localStorage.getItem("user-role");
@@ -10,28 +10,27 @@ const id = localStorage.getItem("user-id");
 const user = ref({});
 
 onMounted(async () => {
+  user.value = await userService.getByRoleAndId(role, id);
   if (role === "student" || role === "parent") {
     await checkLastPaidFee(role);
   }
-  user.value = await userService.getByRoleAndId(role, id);
 });
 
 const alertUnpaidFees = (student) => {
   const unpaid = countUnpaidFees(student);
-  if (unpaid > 0) {
+
+  if (unpaid > 0 && localStorage.getItem("alert-triggered") !== "true") {
     Swal.fire(
       "Cuota impaga",
       `Tiene un total de  ${unpaid} couta/s impaga/s\nPor favor acerquese al centro educativo para abonarlas`,
       "info"
     );
+    localStorage.setItem("alert-triggered", "true");
     return;
   }
 };
 
 const checkLastPaidFee = async (role) => {
-  //const id = localStorage.getItem("user-id");
-  //const user = await userService.getByRoleAndId(role, id);
-
   if (role === "parent") {
     user.value.son = await userService.getByRoleAndId(
       "student",
@@ -46,7 +45,9 @@ const checkLastPaidFee = async (role) => {
 
 <template>
   <section class="container-fluid">
-    <h1 class="mt-4">Bienvenido, {{ user.name }} {{ user.lastName }}</h1>
+    <h1 class="mt-4" v-if="!!user">
+      Bienvenido, {{ user?.name }} {{ user?.lastName }}
+    </h1>
 
     <div v-if="role === 'student'">
       <p class="p-3">
@@ -75,7 +76,7 @@ const checkLastPaidFee = async (role) => {
       </p>
       <img class="logo" src="../assets/logo.jpg" alt="Logo" />
       <div>
-        <router-link to="'/boletin' + user.son.id"
+        <router-link to="/boletin"
           ><button class="btn btn-primary">
             Ver boletin de su hijo
           </button></router-link

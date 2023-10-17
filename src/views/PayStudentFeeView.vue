@@ -87,4 +87,4 @@ const submitForm = async (event) => {
   </div>
 </template>
 
-<style scoped="scss"></style>
+<style lang="scss" scoped></style>

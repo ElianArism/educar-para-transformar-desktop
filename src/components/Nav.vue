@@ -51,19 +51,16 @@ const cerrarSesion = () => {
                 ><i class="bi bi-person icons"></i> Perfil</RouterLink
               >
             </li>
-            <li class="nav-link">
-              <RouterLink
-                class="link-router"
-                v-if="role === 'student' || role === 'parent'"
-                to="/boletin"
+            <li v-if="role === 'student' || role === 'parent'" class="nav-link">
+              <RouterLink class="link-router" to="/boletin"
                 ><i class="bi bi-backpack2 icons"></i> Boletin</RouterLink
               >
             </li>
-            <li class="nav-link">
-              <RouterLink
-                to="/pay-fee"
-                class="link-router"
-                v-if="role === 'personal' || role === 'authority'"
+            <li
+              class="nav-link"
+              v-if="role === 'personal' || role === 'authority'"
+            >
+              <RouterLink to="/pay-fee" class="link-router"
                 ><i class="bi bi-bank icons"></i> Pagos</RouterLink
               >
             </li>
@@ -85,23 +82,15 @@ const cerrarSesion = () => {
                 <i class="bi bi-book icons"></i> Listas
               </a>
               <ul class="dropdown-menu">
-                <li>
+                <li v-if="role === 'professor'">
                   <RouterLink
                     to="/list-alumno"
-                    v-if="
-                      role === 'personal' ||
-                      role === 'authority' ||
-                      role === 'professor'
-                    "
                     class="dropdown-item link-router"
                     >Listado de Alumnos</RouterLink
                   >
                 </li>
-                <li>
-                  <RouterLink
-                    to="/list-profesor"
-                    v-if="role === 'personal' || role === 'authority'"
-                    class="dropdown-item"
+                <li v-if="role === 'personal' || role === 'authority'">
+                  <RouterLink to="/list-profesor" class="dropdown-item"
                     >Profesores</RouterLink
                   >
                 </li>
@@ -111,11 +100,8 @@ const cerrarSesion = () => {
                     >Cuotas Impagas</RouterLink
                   >
                 </li>
-                <li>
-                  <RouterLink
-                    to="/list-parents"
-                    v-if="role === 'personal' || role === 'authority'"
-                    class="dropdown-item"
+                <li v-if="role === 'personal' || role === 'authority'">
+                  <RouterLink to="/list-parents" class="dropdown-item"
                     >Padres</RouterLink
                   >
                 </li>

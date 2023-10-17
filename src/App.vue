@@ -26,7 +26,6 @@ html {
 }
 
 @media print {
-  /* Hide elements not needed for printing */
   header,
   nav,
   .no-print {
