@@ -10,6 +10,7 @@ function createWindow() {
     maxHeight: height,
     width: 800,
     height: 600,
+    icon: "src/assets/logo.ico",
     webPreferences: {
       nodeIntegration: true,
       webSecurity: false, // Allow loading local resources

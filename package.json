@@ -8,7 +8,7 @@
     "start": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "executable-electron": "electron-packager . --platform=win32 --archx64"
+    "executable-electron": "npx electron-packager . --platform=win32 --archx64 --overwrite --icon dist/logo.ico"
   },
   "build": {
     "appId": "com.educarparatransformar.desktopapp",
