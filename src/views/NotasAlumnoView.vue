@@ -1,32 +1,74 @@
 <script setup>
-import { reactive, ref } from "vue";
-import { useRoute } from "vue-router";
+import Swal from "sweetalert2";
+import { onMounted, reactive } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import { StudentService } from "../services/student.service";
-const alumnos = ref([]);
-const { courseId, alumnoId } = useRoute().params;
-console.log(alumnoId, courseId);
-const alumno = reactive({
-  name: "Diego",
-  lastName: "barrios",
-  dni: "123123",
-  nota1: "",
-  nota2: "",
-  nota3: "",
-  recu1: "",
-  recu2: "",
-  recu3: "",
-  notaF: "",
-});
-const notas = () => {
-  console.log(alumno);
-};
-const servicioStudent = new StudentService();
 
-const initStudentList = async () => {
-  const { data } = await servicioStudent.getStudents();
-  alumnos.value = data;
+const { courseId, alumnoId } = useRoute().params;
+const router = useRouter();
+const studentService = new StudentService();
+
+const alumno = reactive({
+  name: "",
+  lastName: "",
+  dni: "",
+  firstTrimester: 0,
+  secondTrimester: 0,
+  thirdTrimester: 0,
+  finalGrade: 0,
+});
+
+const updateStudentGrades = async () => {
+  if (alumno.firstTrimester > 10 || alumno.firstTrimester < 1) {
+    alumno.firstTrimester = 6;
+    return;
+  } else if (alumno.secondTrimester > 10 || alumno.secondTrimester < 1) {
+    alumno.secondTrimester = 6;
+    return;
+  } else if (alumno.thirdTrimester > 10 || alumno.thirdTrimester < 1) {
+    alumno.thirdTrimester = 6;
+    return;
+  }
+
+  alumno.finalGrade = Math.round(
+    (alumno.firstTrimester + alumno.secondTrimester + alumno.thirdTrimester) / 3
+  );
+
+  const resp = await studentService.updateStudentGrades(alumnoId, courseId, {
+    firstTrimester: alumno.firstTrimester,
+    secondTrimester: alumno.secondTrimester,
+    thirdTrimester: alumno.thirdTrimester,
+    finalGrade: alumno.finalGrade,
+  });
+
+  console.log(resp);
+
+  Swal.fire({
+    title: "Nota actualizada",
+    icon: "success",
+    html: "Nota actualizada correctamente",
+    didClose: () => {
+      router.push("/list-alumno");
+      return;
+    },
+  });
 };
-initStudentList();
+
+const getStudentInfo = async () => {
+  const student = await studentService.getStudentById(alumnoId);
+  console.log(student);
+  alumno.dni = student.studentInfo?.id;
+  alumno.name = student.studentInfo?.name;
+  alumno.lastName = student.studentInfo?.lastName;
+  alumno.firstTrimester = student?.schoolGrades?.firstTrimester;
+  alumno.secondTrimester = student?.schoolGrades?.secondTrimester;
+  alumno.thirdTrimester = student?.schoolGrades?.thirdTrimester;
+  alumno.finalGrade = student?.schoolGrades?.finalGrade;
+};
+
+onMounted(async () => {
+  await getStudentInfo();
+});
 </script>
 <template>
   <section class="cuerpo">
@@ -44,9 +86,6 @@ initStudentList();
             <th>Nota 1</th>
             <th>Nota 2</th>
             <th>Nota 3</th>
-            <th>Recu 1</th>
-            <th>Recu 2</th>
-            <th>Recu 3</th>
             <th>Nota Final</th>
             <th>Cargar notas</th>
           </tr>
@@ -68,7 +107,7 @@ initStudentList();
                 class="Notas"
                 min="1"
                 max="10"
-                v-model="alumno.nota1"
+                v-model="alumno.firstTrimester"
               />
             </td>
             <td>
@@ -77,7 +116,7 @@ initStudentList();
                 class="Notas"
                 min="1"
                 max="10"
-                v-model="alumno.nota2"
+                v-model="alumno.secondTrimester"
               />
             </td>
             <td>
@@ -86,7 +125,7 @@ initStudentList();
                 class="Notas"
                 min="1"
                 max="10"
-                v-model="alumno.nota3"
+                v-model="alumno.thirdTrimester"
               />
             </td>
             <td>
@@ -95,37 +134,16 @@ initStudentList();
                 class="Notas"
                 min="1"
                 max="10"
-                v-model="alumno.recu1"
+                readonly
+                v-model="alumno.finalGrade"
               />
             </td>
             <td>
-              <input
-                type="number"
-                class="Notas"
-                min="1"
-                max="10"
-                v-model="alumno.recu2"
-              />
-            </td>
-            <td>
-              <input
-                @input="
-                  () => {
-                    if (value > 0 || value < 11) {
-                      value = 6;
-                    }
-                  }
-                "
-                type="number"
-                class="Notas"
-                min="1"
-                max="10"
-                v-model="alumno.recu3"
-              />
-            </td>
-            <td>Promedio</td>
-            <td>
-              <button type="submit" class="btn btn-info" @click="notas">
+              <button
+                type="submit"
+                class="btn btn-info"
+                @click="updateStudentGrades"
+              >
                 Cargar Notas
               </button>
             </td>

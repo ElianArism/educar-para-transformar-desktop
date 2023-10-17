@@ -20,7 +20,9 @@ export class StudentService extends BaseService {
       const response = await fetch(`${this._url}/courses`);
       const { data } = await response.json();
       const students = data.courses.flatMap((course) => course.students);
-      const student = students.filter((student) => student.id === studentId);
+      const student = students.filter(
+        (student) => student.studentInfo.id === studentId
+      )[0];
       return student;
     } catch (error) {
       console.log(error);
@@ -52,7 +54,7 @@ export class StudentService extends BaseService {
     }
   }
 
-  async updateStudentNotes(studentId, courseId, notes) {
+  async updateStudentGrades(studentId, courseId, notes) {
     try {
       const headers = new Headers();
       headers.append("Content-Type", "application/json");
